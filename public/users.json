@@ -1,0 +1,11 @@
+{
+    "admins": 
+    [
+        { "login": "admin", "password": "admin" }
+    ],
+    "users":
+    [
+        { "login": "user@gmail.com", "password": "11111111" },
+        { "login": "qwerty@mail.ru", "password": "PASSWORD" }
+    ]
+}
