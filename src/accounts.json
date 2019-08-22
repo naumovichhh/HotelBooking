@@ -1,7 +1,7 @@
 {
     "admins": 
     [
-        { "login": "admin", "password": "admin" }
+        { "login": "admin@admin.com", "password": "admin123" }
     ],
     "users":
     [
