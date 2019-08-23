@@ -7,8 +7,8 @@ class Login extends React.Component {
         this.state = { login: "", password: "", loginIsValid: true, passwordIsValid: true };
     }
 
-    passwordIsInvalidMessage = "Password must contain at least 8 characters";
-    loginIsInvalidMessage = "User must contain valid e-mail address";
+    passwordIsInvalidMessage = "Password must contain at least 4 characters";
+    loginIsInvalidMessage = "Login must contain valid email address";
 
     onUserChange = (e) => {
         this.setState({ login: e.target.value });
@@ -26,7 +26,7 @@ class Login extends React.Component {
     }
 
     checkPasswordValid(s) {
-        if (s.length >= 8)
+        if (s.length >= 4)
             return true;
         else
             return false;
@@ -47,11 +47,11 @@ class Login extends React.Component {
     logIn() {
         let login = this.state.login, password = this.state.password;
         if (accounts.admins.find(e => e.login === login && e.password === password) !== undefined) {
-            window.open('/admin', '_self');
+            this.props.history.push("/admin");
         }
         else {
             if (accounts.users.find(e => e.login === login && e.password === password) !== undefined) {
-                window.open('/home', '_self');
+                this.props.history.push("/home");
             }
             else {
                 this.setState({ wrongData: true });
@@ -61,20 +61,16 @@ class Login extends React.Component {
 
     render() {
         return (
-            <form style={{marginLeft: "20px", marginTop: "20px"}} role="form" className="form form-horizontal" >
+            <form style={{marginLeft: "10px", marginRight: "10px", marginTop: "20px", minWidth: "760px"}} role="form" className="form form-signin col-7" >
                 <div className="form-group">
-                    <div className="col-md-2 col-sm-4">
-                        <input className="form-control" placeholder="Username" name="user" type="text" value={this.state.login} onChange={this.onUserChange} />
-                    </div>
-                    {!this.state.loginIsValid && <span className="col-md-2 col-sm-4" style={{color: "red"}} >{this.loginIsInvalidMessage}</span>}
+                    <input className="form-control col-3" style={{display: "inline"}} placeholder="Username" name="user" type="text" value={this.state.login} onChange={this.onUserChange} />
+                    {!this.state.loginIsValid ? <span className="col-3" style={{color: "red"}} >{this.loginIsInvalidMessage}</span> : <span> </span>}
                 </div>
                 <div className="form-group">
-                    <div className="col-md-2 col-sm-4">
-                        <input className="form-control" placeholder="Password" name="password" type="password" value={this.state.password} onChange={this.onPasswordChange}/>
-                    </div>
-                    {!this.state.passwordIsValid && <span className="col-md-2 col-sm-4" style={{color: "red"}}>{this.passwordIsInvalidMessage}</span>}
+                    <input className="form-control col-3" style={{display: "inline"}} placeholder="Password" name="password" type="password" value={this.state.password} onChange={this.onPasswordChange}/>
+                    {!this.state.passwordIsValid ? <span className="col-3" style={{color: "red"}}>{this.passwordIsInvalidMessage}</span> : <span> </span>}
                 </div>
-                <div className="form-group col-md-2 col-sm-4">
+                <div className="form-group">
                     <input className="btn btn-primary" name="send" type="submit" value="Войти" onClick={this.onSubmit} />
                 </div>
             </form>
