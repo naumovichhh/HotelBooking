@@ -1,5 +1,5 @@
 import React from 'react';
-import accounts from './accounts.json';
+import authorization from './services/authorization/Authorization';
 
 class Login extends React.Component {
     constructor(properties) {
@@ -46,22 +46,19 @@ class Login extends React.Component {
 
     logIn() {
         let login = this.state.login, password = this.state.password;
-        if (accounts.admins.find(e => e.login === login && e.password === password) !== undefined) {
-            this.props.history.push("/admin");
+        if (authorization.authorize(login, password)) {
+            if (authorization.currentAccount.role === 'admin')
+                this.props.history.push('/edit');
+            else
+                this.props.history.push('/home');
         }
-        else {
-            if (accounts.users.find(e => e.login === login && e.password === password) !== undefined) {
-                this.props.history.push("/home");
-            }
-            else {
-                this.setState({ wrongData: true });
-            }
-        }
+        else
+            this.setState({ showWrongCredentials: true });
     }
 
-    render() {
+    form() {
         return (
-            <form style={{marginLeft: "10px", marginRight: "10px", marginTop: "20px", minWidth: "760px"}} role="form" className="form form-signin col-7" >
+            <form style={{marginLeft: "10px", marginRight: "10px", marginTop: "20px", minWidth: "760px"}} role="form" className="form form-signin col-9" >
                 <div className="form-group">
                     <input className="form-control col-3" style={{display: "inline"}} placeholder="Username" name="user" type="text" value={this.state.login} onChange={this.onUserChange} />
                     {!this.state.loginIsValid ? <span className="col-3" style={{color: "red"}} >{this.loginIsInvalidMessage}</span> : <span> </span>}
@@ -75,6 +72,24 @@ class Login extends React.Component {
                 </div>
             </form>
         );
+    }
+
+    wrongCredentials() {
+        return <React.Fragment>
+            <span>Wrong credentials!</span>
+            <button className="btn btn-secondary" onClick={this.onTryAgainClick} >Try again</button>
+        </React.Fragment>
+    }
+
+    onTryAgainClick = () => {
+        this.setState({ showWrongCredentials: false, login: "", password: "" });
+    }
+
+    render() {
+        if (this.state.showWrongCredentials)
+            return this.wrongCredentials();
+        else
+            return this.form();
     }
 }
 

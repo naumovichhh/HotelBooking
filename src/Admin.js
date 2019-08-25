@@ -1,14 +1,16 @@
 import React from 'react';
-import hotels from './hotels.json';
+import request from './services/request';
 
 class Admin extends React.Component {
     constructor(props) {
         super(props);
-
     }
 
     renderHotelsList() {
-        let list = hotels.hotels.map((e) =>
+        let list = request({
+            url: "/service/api",
+            method: "GET"
+        }).map((e) =>
         <li key={e.name} className="list-group-item">
             <h4>{e.name}</h4>
             <ul>
