@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import Login from './Login';
 import Home from './Home';
-import Admin from './Admin';
+import Admin from './modules/Admin/components/Admin';
 import AuthorizedRoute from './AuthorizedRoute';
 
 function App() {
