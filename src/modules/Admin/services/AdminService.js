@@ -1,3 +1,5 @@
 class AdminService {
-    
+    getHotels() {
+        
+    }
 }
