@@ -1,4 +1,4 @@
-import accounts from './accounts.json';
+import accounts from './accounts.json.js.js.js';
 
 class Authorization {
     constructor()
@@ -28,4 +28,4 @@ class Authorization {
     }
 };
 
-export default Authorization;
+export default authorization;

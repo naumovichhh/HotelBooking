@@ -1,4 +1,4 @@
-import requestMock from './requestMock';
+import requestMock from './mock/requestMock';
 
 function request(params) {
     return requestMock(params);
