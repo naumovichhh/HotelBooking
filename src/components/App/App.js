@@ -1,24 +1,25 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import Login from '../Login/Login';
-import Home from '../../Home';
-import Admin from '../Admin/Admin.js';
-import AuthorizedRoute from '../AuthorizedRoute/AuthorizedRoute';
-import Authorization from '../../services/authorization/Authorization';
-
-let authorization = new Authorization();
+import Login from '../Login';
+import Home from '../Home';
+import Admin from '../Admin';
+import AuthorizedRoute from '../AuthorizedRoute';
+import { Provider } from 'react-redux';
+import store from 'rdx/store';
 
 const App = () => {
     return (
-        <BrowserRouter>
-            <Switch>
-                <Route exact path="/home" component={Home} />
-                <Route exact path="/login" authorization={authorization} render={(props) => <Login {...props} authorization={authorization} />} />
-                <AuthorizedRoute exact authorization={authorization} role="admin" path="/edit" component={Admin} />
-                <Redirect exact from="/" to="home" />
-                <Route component={NoMatch} />
-            </Switch>
-        </BrowserRouter>
+        <Provider store={store} >
+            <BrowserRouter>
+                <Switch>
+                    <Route exact path="/home" component={Home} />
+                    <Route exact path="/login" component={Login} />
+                    <AuthorizedRoute exact role="admin" path="/edit" component={Admin} />
+                    <Redirect exact from="/" to="home" />
+                    <Route component={NoMatch} />
+                </Switch>
+            </BrowserRouter>
+        </Provider>
     );
 }
 
