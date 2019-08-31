@@ -1,0 +1,14 @@
+import React from 'react';
+import Home from '../component/Home';
+
+class HomeContainer extends React.Component {
+    render() {
+        return <Home />
+    }
+}
+
+<<<<<<< HEAD
+export default HomeContainer;
+=======
+export default Home;
+>>>>>>> 7e938f1c378dcecd035a16744fa4841c802ab13b

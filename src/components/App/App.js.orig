@@ -1,12 +1,23 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+<<<<<<< HEAD
+import Login from '../Login/Login';
+import Home from '../Home/Home';
+import Admin from '../Admin/Admin';
+import AuthorizedRoute from '../AuthorizedRoute/AuthorizedRoute';
+import Authorization from '../../services/authorization/Authorization';
+import store from 'redux/store';
+import { Provider } from 'redux';
+
+let authorization = new Authorization();
+=======
 import Login from '../Login';
 import Home from '../Home';
 import Admin from '../Admin';
 import AuthorizedRoute from '../AuthorizedRoute';
 import { Provider } from 'react-redux';
 import store from 'rdx/store';
-import { Provider } from 'redux';
+>>>>>>> 7e938f1c378dcecd035a16744fa4841c802ab13b
 
 const App = () => {
     return (
@@ -14,8 +25,13 @@ const App = () => {
             <BrowserRouter>
                 <Switch>
                     <Route exact path="/home" component={Home} />
+<<<<<<< HEAD
+                    <Route exact path="/login" authorization={authorization} render={(props) => <Login {...props} authorization={authorization} />} />
+                    <AuthorizedRoute exact authorization={authorization} role="admin" path="/edit" component={Admin} />
+=======
                     <Route exact path="/login" component={Login} />
                     <AuthorizedRoute exact role="admin" path="/edit" component={Admin} />
+>>>>>>> 7e938f1c378dcecd035a16744fa4841c802ab13b
                     <Redirect exact from="/" to="home" />
                     <Route component={NoMatch} />
                 </Switch>

@@ -1,9 +1,15 @@
+<<<<<<< HEAD
+
+const Home = () => {
+    return 'This page will be available soon';
+=======
 import React from 'react';
 
 class Home extends React.Component {
     render() {
         return 'This page will be available soon';
     }
+>>>>>>> 7e938f1c378dcecd035a16744fa4841c802ab13b
 }
 
 export default Home;

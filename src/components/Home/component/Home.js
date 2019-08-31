@@ -1,6 +1,9 @@
+import React from 'react';
 
-const Home = () => {
-    return 'This page will be available soon';
+class Home extends React.Component {
+    render() {
+        return 'This page will be available soon';
+    }
 }
 
 export default Home;
