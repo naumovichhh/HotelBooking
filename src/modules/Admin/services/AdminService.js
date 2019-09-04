@@ -1,5 +1,1 @@
-class AdminService {
-    getHotels() {
-        //откуда брать данные
-    }
-}
+import request from 'request';
