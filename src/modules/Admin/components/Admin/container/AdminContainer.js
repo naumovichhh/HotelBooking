@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Admin from '../../../modules/Admin/components/component/Admin';
+import Admin from '../component/Admin';
+import AdminService from '../../../services/AdminService';
 
 class AdminContainer extends React.Component {
     constructor(props) {
@@ -8,15 +9,14 @@ class AdminContainer extends React.Component {
     }
 
     componentDidMount() {
-        this.props.dispatch();
+        AdminService.fetchHotels();
     }
 
     render() {
-        let hotelsList = this.props.hotelsList;
-        return <Admin hotelsList={hotelsList}/>;
+        return <Admin hotelsList={this.props.list} fulfilled={this.props.fulfilled} />;
     }
 }
 
-const mapStateToProps = (state) => { state.hotels };
+const mapStateToProps = (state) => ({ ...state.hotels });
 
 export default connect(mapStateToProps)(AdminContainer);

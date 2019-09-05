@@ -1,5 +1,6 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import combinedReducer from './reducers/combinedReducer';
-import thunk from 'react-thunk';
+import thunk from 'redux-thunk';
 
-export default createStore(combinedReducer, { auth: { loggedIn: false } }, applyMiddleware(thunk));
+const store = createStore(combinedReducer, { auth: { loggedIn: false } }, applyMiddleware(thunk));
+export default store;

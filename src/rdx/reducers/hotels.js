@@ -1,8 +1,3 @@
-const hotels = (state = {}, action) => {
-    switch (action.type) {
-        default:
-            return state;
-    }
-}
+import hotels from 'modules/Admin/reducers';
 
 export default hotels;

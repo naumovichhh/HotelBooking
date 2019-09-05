@@ -1,4 +1,4 @@
-import hotels from '../hotels.json.js.js';
+import hotels from './hotels.json';
 
 const dataMock = {
     GET: () => {
