@@ -17,8 +17,16 @@ class LoginService {
     }
 
     static login(history, credentials) {
-        request({
-        });
+        store.dispatch(dispatch => {
+            
+            request({
+                method: "GET",
+                url: "api/auth",
+                payload: credentials
+            })
+            .then();
+        }
+        );
     }
 }
 

@@ -1,5 +1,0 @@
-function login() {
-    return dispatch => {
-        
-    }
-}

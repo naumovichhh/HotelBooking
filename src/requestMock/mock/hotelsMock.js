@@ -1,6 +1,6 @@
 import hotels from './hotels.json';
 
-const dataMock = {
+const hotelsMock = {
     GET: () => {
         return hotels.hotels;
     },
@@ -17,4 +17,4 @@ const dataMock = {
     }
 }
 
-export default dataMock;
+export default hotelsMock;
