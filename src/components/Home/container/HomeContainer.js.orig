@@ -7,4 +7,8 @@ class HomeContainer extends React.Component {
     }
 }
 
+<<<<<<< HEAD
 export default HomeContainer;
+=======
+export default Home;
+>>>>>>> 7e938f1c378dcecd035a16744fa4841c802ab13b
