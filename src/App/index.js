@@ -15,7 +15,7 @@ const App = () => {
                     <Route exact path="/home" component={Home} />
                     <Route exact path="/login" component={Login} />
                     <AuthorizedRoute exact role="user" path="/edit" component={Admin} />
-                    <Redirect exact from="/" to="home" />
+                    <Redirect exact from="/" to="/home" />
                     <Route component={NoMatch} />
                 </Switch>
             </BrowserRouter>

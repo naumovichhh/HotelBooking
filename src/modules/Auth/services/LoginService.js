@@ -1,5 +1,5 @@
 import store from 'rdx/store';
-import request from 'requestMock';
+import { authorize } from '../actions';
 
 class LoginService {
     static validateLogin(s) {
@@ -17,16 +17,7 @@ class LoginService {
     }
 
     static login(history, credentials) {
-        store.dispatch(dispatch => {
-            
-            request({
-                method: "GET",
-                url: "api/auth",
-                payload: credentials
-            })
-            .then();
-        }
-        );
+        store.dispatch(authorize(credentials));
     }
 }
 

@@ -1,31 +1,38 @@
 import request from 'requestMock';
 
-const REQUEST_HOTELS = "REQUEST_HOTELS";
-const RECEIVE_HOTELS = "RECEIVE_HOTELS";
+const GET_HOTELS_REQUEST = "GET_HOTELS_REQUEST";
+const GET_HOTELS_SUCCESS = "GET_HOTELS_SUCCESS";
+const GET_HOTELS_FAILURE = "GET_HOTELS_FAILURE";
 
-export { REQUEST_HOTELS, RECEIVE_HOTELS };
+export { GET_HOTELS_REQUEST, GET_HOTELS_SUCCESS, GET_HOTELS_FAILURE };
 
-function requestHotels() {
+function _request() {
     return {
-        type: REQUEST_HOTELS
+        type: GET_HOTELS_REQUEST
     };
 }
 
-function receiveHotels(hotels) {
+function success(hotels) {
     return {
-        type: RECEIVE_HOTELS,
+        type: GET_HOTELS_SUCCESS,
         hotels
+    };
+}
+
+function failure(hotels) {
+    return {
+        type: GET_HOTELS_FAILURE
     };
 }
 
 function fetchHotels() {
     return dispatch => {
-        dispatch(requestHotels());
+        dispatch(_request());
         request({
             method: "GET",
             url: "/api/hotels",
         })
-        .then(data => dispatch(receiveHotels(data)));
+        .then(data => dispatch(success(data)));
     }
 }
 

@@ -23,6 +23,7 @@ class LoginContainer extends React.Component {
         let passwordIsValid = LoginService.validatePassword(this.state.password);
         if (loginIsValid & passwordIsValid) {
             LoginService.login(this.props.history, { login: this.state.login, password: this.state.password } );
+
         }
         else {
             this.setState({ loginIsValid, passwordIsValid });
@@ -44,12 +45,15 @@ class LoginContainer extends React.Component {
     }
 
     render() {
-        return <Login wrong={this.state.wrongCredentials}
+        console.log(this.props);
+        return <Login wrong={this.props.auth.failed}
             loginIsValid={this.state.loginIsValid}
             passwordIsValid={this.state.passwordIsValid}
             onSubmit={this.onSubmit}
             onUserChange={this.onUserChange}
             onPasswordChange={this.onPasswordChange}
+            authorized={this.props.auth.authorized}
+            inProcess={this.props.auth.inProcess}
         />
     }
 }

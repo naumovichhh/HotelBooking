@@ -1,37 +1,45 @@
 import request from 'requestMock';
 import store from 'rdx/store';
 
-const AUTHORIZE_REQUEST = "AUTHORIZE_REQUEST";
-const AUTHORIZED = "AUTHORIZED";
-const AUTHORIZE_DENIED = "AUTHORIZE_REJECTED";
+const AUTHORIZATION_REQUEST = "AUTHORIZATION_REQUEST";
+const AUTHORIZATION_FAILURE = "AUTHORIZATION_FAILURE";
+const AUTHORIZATION_SUCCESS = "AUTHORIZATION_SUCCESS";
 
-export { AUTHORIZE_REQUEST, AUTHORIZED, AUTHORIZE_DENIED };
+export { AUTHORIZATION_REQUEST, AUTHORIZATION_FAILURE, AUTHORIZATION_SUCCESS };
 
-function authorizeRequest() {
+function _request() {
     return {
-        type: AUTHORIZE_REQUEST
+        type: AUTHORIZATION_REQUEST
     }
 }
 
-function authorized(data) {
+function success(data) {
     return {
-        type: AUTHORIZED,
+        type: AUTHORIZATION_SUCCESS,
         ...data
     }
 }
 
-function authorizeDenied() {
+function failure() {
     return {
-        type: AUTHORIZE_DENIED
+        type: AUTHORIZATION_FAILURE
     }
 }
 
-function authorize(params) {
+function authorize(credentials) {
     return dispatch => {
-        store.dispatch(authorizeRequest);
-        request(params)
-        .then(data => store.dispatch(authorized(data)))
-        .catch(() => authorizeDenied());
+        store.dispatch(_request());
+        request({
+            method: "POST",
+            url: "api/auth",
+            payload: credentials
+        })
+        .then(result => {
+            if (result.authorized)
+                store.dispatch(success({ user: result.user }));
+            else
+                store.dispatch(failure);
+        });
     };
 }
 

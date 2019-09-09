@@ -1,13 +1,15 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 
 const Login = (props) => {
+    if (props.authorized)
+        return <Redirect to="/admin" />;
+
     const loginIsInvalidMessage = "Login is invalid";
     const passwordIsInvalidMessage = "Password is invalid";
-    console.log(props);
-
     return (
         <React.Fragment>
-            <form style={{ marginLeft: "10px", marginRight: "10px", marginTop: "20px", minWidth: "760px" }} role="form" className="form form-signin col-9" >
+            <form style={{ marginLeft: "10px", marginRight: "10px", marginTop: "20px", minWidth: "760px" }} className="form form-signin col-9" >
                 <div className="form-group">
                     <input className="form-control col-3" style={{ display: "inline" }} placeholder="Username" name="user" type="text" value={props.login} onChange={props.onUserChange} />
                     {!props.loginIsValid ? <span className="col-3" style={{ color: "red" }} >{loginIsInvalidMessage}</span> : <span> </span>}
@@ -20,6 +22,7 @@ const Login = (props) => {
                     <input className="btn btn-primary" name="send" type="submit" value="Войти" onClick={props.onSubmit} />
                 </div>
             </form>
+            {props.inProcess && <span>Loading</span>}
             {props.wrong && <span>Wrong credentials!</span>}
         </React.Fragment>
     );
