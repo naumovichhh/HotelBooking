@@ -1,7 +1,6 @@
 import { AUTHORIZATION_REQUEST, AUTHORIZATION_SUCCESS, AUTHORIZATION_FAILURE } from "../actions";
 
 function auth(state = { authorized: false }, action) {
-    console.log(state);
     switch (action.type) {
         case AUTHORIZATION_REQUEST:
             return { ...state, inProcess: true, failed: false };

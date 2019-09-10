@@ -4,10 +4,6 @@ import Admin from '../component/Admin';
 import AdminService from '../../../services/AdminService';
 
 class AdminContainer extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         AdminService.fetchHotels();
     }

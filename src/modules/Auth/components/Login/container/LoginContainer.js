@@ -2,6 +2,7 @@ import React from 'react';
 import Login from '../component/Login';
 import { connect } from 'react-redux';
 import LoginService from '../../../services/LoginService';
+import { Redirect } from 'react-router-dom';
 
 class LoginContainer extends React.Component {
     constructor(properties) {
@@ -45,7 +46,13 @@ class LoginContainer extends React.Component {
     }
 
     render() {
-        console.log(this.props);
+        if (this.props.auth.authorized) {
+            if (this.props.auth.user.role === "admin")
+                return <Redirect to="/edit" />;
+            else
+                return <Redirect to="/home" />;            
+        }
+
         return <Login wrong={this.props.auth.failed}
             loginIsValid={this.state.loginIsValid}
             passwordIsValid={this.state.passwordIsValid}

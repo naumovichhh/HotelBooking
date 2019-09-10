@@ -6,7 +6,7 @@ class AuthorizedRoute extends React.Component {
     render() {
         let {auth, component: Component, role, ...rest} = this.props;
         return <Route {...rest} render={(props) =>
-            auth.loggedIn && auth.role === role ?
+            auth.authorized && auth.user.role === role ?
             <Component {...props} /> :
             <Redirect to="/login" />
         }/>;
