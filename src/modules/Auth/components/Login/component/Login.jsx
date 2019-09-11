@@ -7,7 +7,7 @@ const Login = (props) => {
         <React.Fragment>
             <form style={{ marginLeft: "10px", marginRight: "10px", marginTop: "20px", minWidth: "760px" }} className="form form-signin col-9" >
                 <div className="form-group">
-                    <input className="form-control col-3" style={{ display: "inline" }} placeholder="Username" name="user" type="text" onChange={props.onUserChange} />
+                    <input className="form-control col-3" style={{ display: "inline" }} placeholder="Username" name="user" type="text" value={props.login} onChange={props.onUserChange} />
                     {!props.loginIsValid ? <span className="col-3" style={{ color: "red" }} >{loginIsInvalidMessage}</span> : <span> </span>}
                 </div>
                 <div className="form-group">
