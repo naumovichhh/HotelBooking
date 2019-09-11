@@ -1,4 +1,4 @@
-import request from 'requestMock';
+import requestMock from 'requestMock';
 
 const GET_HOTELS_REQUEST = "GET_HOTELS_REQUEST";
 const GET_HOTELS_SUCCESS = "GET_HOTELS_SUCCESS";
@@ -28,7 +28,7 @@ function failure(hotels) {
 function fetchHotels() {
     return dispatch => {
         dispatch(_request());
-        request({
+        requestMock({
             method: "GET",
             url: "api/hotels",
         })

@@ -8,8 +8,15 @@ class HomeContainer extends React.Component {
         HomeService.fetchHotels();
     }
 
+    onClick = (id) => {
+        this.props.history.push(`/hotel/${id}`);
+    }
+
     render() {
-        return <Home hotelsList={this.props.list} fulfilled={this.props.fulfilled} />
+        return <Home
+            hotelsList={this.props.list}
+            fulfilled={this.props.fulfilled}
+            onClick={this.onClick} />
     }
 }
 
