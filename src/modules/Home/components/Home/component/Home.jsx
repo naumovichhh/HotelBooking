@@ -1,4 +1,5 @@
 import React from 'react';
+import Filter from '../../Filter';
 
 function Home(props) {
     if (!props.fulfilled) {
@@ -18,13 +19,12 @@ function Home(props) {
         </div>
     </li>);
     const ul = <ul className="list-group">{markupList}</ul>;
-    return <div className="container">
-        <div className="row">
+    return  <div className="row">
+            <Filter />
             <div className="col-9 col-sm-8" style={{ minWidth: "600px" }} >
                 {ul}
             </div>
         </div>
-    </div>;
 }
 
 export default Home;
