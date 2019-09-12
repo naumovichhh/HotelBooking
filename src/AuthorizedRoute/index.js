@@ -1,6 +1,7 @@
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import NotFound from 'common/components/NotFound';
 
 class AuthorizedRoute extends React.Component {
     render() {
@@ -8,7 +9,7 @@ class AuthorizedRoute extends React.Component {
         return <Route {...rest} render={(props) =>
             auth.authorized && auth.user.role === role ?
             <Component {...props} /> :
-            <Redirect to="/login" />
+            <NotFound />
         }/>;
     }
 }

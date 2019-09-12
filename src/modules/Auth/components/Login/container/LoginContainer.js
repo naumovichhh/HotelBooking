@@ -31,24 +31,13 @@ class LoginContainer extends React.Component {
         }
     }
 
-    logIn() {
-        let login = this.state.login, password = this.state.password;
-        let authorization = this.props.auth;
-        this.props.authorize();
-        if (authorization.authorize(login, password)) {
-            if (authorization.currentAccount.role === 'admin')
-                this.props.history.push('/edit');
-            else
-                this.props.history.push('/home');
-        }
-        else
-            this.setState({ wrongCredentials: true });
-    }
-
     render() {
+        console.log("EГOL");
         if (this.props.auth.authorized) {
-            if (this.props.auth.user.role === "admin")
+            if (this.props.auth.user.role === "admin") {
+                console.log("EGOL");
                 return <Redirect to="/edit" />;
+            }
             else
                 return <Redirect to="/home" />;            
         }
