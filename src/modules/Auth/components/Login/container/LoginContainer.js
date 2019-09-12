@@ -32,10 +32,8 @@ class LoginContainer extends React.Component {
     }
 
     render() {
-        console.log("EГOL");
         if (this.props.auth.authorized) {
             if (this.props.auth.user.role === "admin") {
-                console.log("EGOL");
                 return <Redirect to="/edit" />;
             }
             else

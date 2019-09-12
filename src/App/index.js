@@ -16,10 +16,10 @@ import { Container } from 'react-bootstrap';
 const App = () => {
     return (
         <Provider store={store} >
-            <Navigation />
-            <br />
-            <Container>
                 <BrowserRouter>
+                    <Navigation />
+                    <br />
+                    <Container>
                     <Switch>
                         <Route exact path="/home" component={Home} />
                         <Route path="/hotel/:id" component={Hotel} />
@@ -29,9 +29,9 @@ const App = () => {
                         <Redirect exact from="/" to="/home" />
                         <Route component={NotFound} />
                     </Switch>
+                    <Footer />
+                    </Container>
                 </BrowserRouter>
-            <Footer />
-            </Container>
         </Provider>
     );
 }
