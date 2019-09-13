@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Raman.Naumovich\\source\\repos\\Hotel Booking\\Api\\Core\\Core.csproj": {}
+    "C:\\Users\\Raman.Naumovich\\source\\repos\\react-app\\Api\\Core\\Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Raman.Naumovich\\source\\repos\\Hotel Booking\\Api\\Core\\Core.csproj": {
+    "C:\\Users\\Raman.Naumovich\\source\\repos\\react-app\\Api\\Core\\Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Raman.Naumovich\\source\\repos\\Hotel Booking\\Api\\Core\\Core.csproj",
+        "projectUniqueName": "C:\\Users\\Raman.Naumovich\\source\\repos\\react-app\\Api\\Core\\Core.csproj",
         "projectName": "Core",
-        "projectPath": "C:\\Users\\Raman.Naumovich\\source\\repos\\Hotel Booking\\Api\\Core\\Core.csproj",
+        "projectPath": "C:\\Users\\Raman.Naumovich\\source\\repos\\react-app\\Api\\Core\\Core.csproj",
         "packagesPath": "C:\\Users\\Raman.Naumovich\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Raman.Naumovich\\source\\repos\\Hotel Booking\\Api\\Core\\obj\\",
+        "outputPath": "C:\\Users\\Raman.Naumovich\\source\\repos\\react-app\\Api\\Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

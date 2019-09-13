@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Raman.Naumovich\\source\\repos\\Hotel Booking\\Api\\Infrastructure\\Infrastructure.csproj": {}
+    "C:\\Users\\Raman.Naumovich\\source\\repos\\react-app\\Api\\Infrastructure\\Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Raman.Naumovich\\source\\repos\\Hotel Booking\\Api\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\Raman.Naumovich\\source\\repos\\react-app\\Api\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Raman.Naumovich\\source\\repos\\Hotel Booking\\Api\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Raman.Naumovich\\source\\repos\\react-app\\Api\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\Raman.Naumovich\\source\\repos\\Hotel Booking\\Api\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "C:\\Users\\Raman.Naumovich\\source\\repos\\react-app\\Api\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Raman.Naumovich\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Raman.Naumovich\\source\\repos\\Hotel Booking\\Api\\Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\Raman.Naumovich\\source\\repos\\react-app\\Api\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -41,6 +41,10 @@
       "frameworks": {
         "netcoreapp2.2": {
           "dependencies": {
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[2.2.6, )"
+            },
             "Microsoft.NETCore.App": {
               "suppressParent": "All",
               "target": "Package",
