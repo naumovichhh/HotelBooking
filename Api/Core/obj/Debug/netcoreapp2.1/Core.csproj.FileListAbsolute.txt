@@ -1,0 +1,9 @@
+C:\Users\Raman.Naumovich\source\repos\Hotel Booking\Api\Core\bin\Debug\netcoreapp2.1\Core.deps.json
+C:\Users\Raman.Naumovich\source\repos\Hotel Booking\Api\Core\bin\Debug\netcoreapp2.1\Core.dll
+C:\Users\Raman.Naumovich\source\repos\Hotel Booking\Api\Core\bin\Debug\netcoreapp2.1\Core.pdb
+C:\Users\Raman.Naumovich\source\repos\Hotel Booking\Api\Core\obj\Debug\netcoreapp2.1\Core.csprojAssemblyReference.cache
+C:\Users\Raman.Naumovich\source\repos\Hotel Booking\Api\Core\obj\Debug\netcoreapp2.1\Core.csproj.CoreCompileInputs.cache
+C:\Users\Raman.Naumovich\source\repos\Hotel Booking\Api\Core\obj\Debug\netcoreapp2.1\Core.AssemblyInfoInputs.cache
+C:\Users\Raman.Naumovich\source\repos\Hotel Booking\Api\Core\obj\Debug\netcoreapp2.1\Core.AssemblyInfo.cs
+C:\Users\Raman.Naumovich\source\repos\Hotel Booking\Api\Core\obj\Debug\netcoreapp2.1\Core.dll
+C:\Users\Raman.Naumovich\source\repos\Hotel Booking\Api\Core\obj\Debug\netcoreapp2.1\Core.pdb

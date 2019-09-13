@@ -1,0 +1,12 @@
+C:\Users\Raman.Naumovich\source\repos\Hotel Booking\Api\HotelBookingApi\obj\Debug\netcoreapp2.1\Api.csprojAssemblyReference.cache
+C:\Users\Raman.Naumovich\source\repos\Hotel Booking\Api\HotelBookingApi\obj\Debug\netcoreapp2.1\Api.csproj.CoreCompileInputs.cache
+C:\Users\Raman.Naumovich\source\repos\Hotel Booking\Api\HotelBookingApi\obj\Debug\netcoreapp2.1\Api.RazorAssemblyInfo.cache
+C:\Users\Raman.Naumovich\source\repos\Hotel Booking\Api\HotelBookingApi\obj\Debug\netcoreapp2.1\Api.RazorAssemblyInfo.cs
+C:\Users\Raman.Naumovich\source\repos\Hotel Booking\Api\HotelBookingApi\obj\Debug\netcoreapp2.1\Api.AssemblyInfoInputs.cache
+C:\Users\Raman.Naumovich\source\repos\Hotel Booking\Api\HotelBookingApi\obj\Debug\netcoreapp2.1\Api.AssemblyInfo.cs
+C:\Users\Raman.Naumovich\source\repos\Hotel Booking\Api\Api\obj\Debug\netcoreapp2.1\Api.csprojAssemblyReference.cache
+C:\Users\Raman.Naumovich\source\repos\Hotel Booking\Api\Api\obj\Debug\netcoreapp2.1\Api.csproj.CoreCompileInputs.cache
+C:\Users\Raman.Naumovich\source\repos\Hotel Booking\Api\Api\obj\Debug\netcoreapp2.1\Api.RazorAssemblyInfo.cache
+C:\Users\Raman.Naumovich\source\repos\Hotel Booking\Api\Api\obj\Debug\netcoreapp2.1\Api.RazorAssemblyInfo.cs
+C:\Users\Raman.Naumovich\source\repos\Hotel Booking\Api\Api\obj\Debug\netcoreapp2.1\Api.AssemblyInfoInputs.cache
+C:\Users\Raman.Naumovich\source\repos\Hotel Booking\Api\Api\obj\Debug\netcoreapp2.1\Api.AssemblyInfo.cs
