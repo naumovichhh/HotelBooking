@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Api.Entities
+namespace Core
 {
-    public class Hotel
+    public class HotelEntity
     {
-        public Hotel(int id, string name, string address, string locality, string country, string image)
+        public HotelEntity(int id, string name, string address, string locality, string country, string image)
         {
             Id = id;
             Name = name ?? throw new ArgumentNullException(nameof(name));

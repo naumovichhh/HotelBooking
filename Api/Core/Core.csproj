@@ -2,12 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <RootNamespace>Business_Logic</RootNamespace>
+    <RootNamespace>Core</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <Folder Include="DTO\" />
-    <Folder Include="Entities\" />
   </ItemGroup>
 
 </Project>

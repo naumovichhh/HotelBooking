@@ -2,29 +2,28 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Api.Entities;
 
-namespace Api.Services
+namespace Core
 {
     public class HotelService : IHotelService
     {
-        private List<Hotel> hotels = new List<Hotel>()
+        private List<HotelEntity> hotels = new List<HotelEntity>()
         {
-            new Hotel(1, "CITYHOTEL", "Kreschatik, 43", "Kyiv", "Ukraine", "hotel.jpg"),
-            new Hotel(2, "Hotel du Parc", "Verbier, 10, 34", "Montelimar", "France", "hotel.jpg")
+            new HotelEntity(1, "CITYHOTEL", "Kreschatik, 43", "Kyiv", "Ukraine", "hotel.jpg"),
+            new HotelEntity(2, "Hotel du Parc", "Verbier, 10, 34", "Montelimar", "France", "hotel.jpg")
         };
 
-        public IEnumerable<Hotel> GetAll() => hotels;
+        public IEnumerable<HotelEntity> GetAll() => hotels;
 
-        public Hotel GetById(int id) => hotels.Find(h => h.Id == id);
+        public HotelEntity GetById(int id) => hotels.Find(h => h.Id == id);
 
-        public Hotel Create(Hotel hotel)
+        public HotelEntity Create(HotelEntity hotel)
         {
             hotels.Add(hotel);
             return hotel;
         }
 
-        public Hotel Update(Hotel hotel)
+        public HotelEntity Update(HotelEntity hotel)
         {
             int index = hotels.FindIndex(h => h.Id == hotel.Id);
             if (index != -1)
@@ -36,7 +35,7 @@ namespace Api.Services
                 return null;
         }
 
-        public Hotel Delete(int id)
+        public HotelEntity Delete(int id)
         {
             int index = hotels.FindIndex(h => h.Id == id);
             if (index != -1)

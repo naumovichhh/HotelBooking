@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Api.Entities;
 
-namespace Api.Services
+namespace Core
 {
     public interface IHotelService
     {
-        IEnumerable<Hotel> GetAll();
-        Hotel GetById(int id);
-        Hotel Create(Hotel hotel);
-        Hotel Update(Hotel hotel);
-        Hotel Delete(int id);
+        IEnumerable<HotelEntity> GetAll();
+        HotelEntity GetById(int id);
+        HotelEntity Create(HotelEntity hotel);
+        HotelEntity Update(HotelEntity hotel);
+        HotelEntity Delete(int id);
     }
 }
