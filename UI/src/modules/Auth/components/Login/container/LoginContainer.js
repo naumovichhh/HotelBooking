@@ -34,10 +34,10 @@ class LoginContainer extends React.Component {
     render() {
         if (this.props.auth.authorized) {
             if (this.props.auth.user.role === "admin") {
-                return <Redirect to="/edit" />;
+                return <Redirect to="/admin" />;
             }
             else
-                return <Redirect to="/home" />;            
+                return <Redirect to="/catalog" />;            
         }
 
         return <Login wrong={this.props.auth.failed}

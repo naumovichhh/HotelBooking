@@ -1,33 +1,33 @@
 import React from 'react';
-import Filter from '../../Filter';
-import { Spinner } from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
+import Select from 'react-select';
 
-function Home(props) {
-    if (!props.fulfilled) {
-        return <div>
-            <Spinner animation="border" />
-        </div>;
-    }
-
-    const markupList = props.hotelsList.map(hotel => <li key={hotel.name} className="list-group-item d-flex align-items-center">
-        <div className="image-parent" style={{ maxWidth: "100px" }} >
-            <img src={hotel.image} className="img-fluid" alt="lay" />
+const Home = (props) => {
+    return <div className="row" >
+        <div className="col-10 col-md-6" >
+            <Form>
+                <Form.Group>
+                    <Form.Label>Country</Form.Label>
+                    <Select onChange={props.onCountryChange} options={props.countries.map(c => ({ value: c, label: c }))} />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Locality</Form.Label>
+                    <Form.Control type="text" onChange={props.onLocalityChange} value={props.locality} />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>From</Form.Label>
+                    <Form.Control type="date" value={props.from} />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>To</Form.Label>
+                    <Form.Control type="date" value={props.to} />
+                </Form.Group>
+                <Button variant="primary" onClick={props.onSubmit}>
+                    Search
+                </Button>
+            </Form>
         </div>
-        <div style={{ marginLeft: "20px" }} >
-            <h2><a href="/controller/action" onClick={(e) => { e.preventDefault(); props.onClick(hotel.id) }}>{hotel.name}</a></h2>
-            <h6>{hotel.locality}, {hotel.country}</h6>
-        </div>
-        <div style={{ marginLeft: "10px", position: "absolute", right: "20px" }} >
-            <button type="button" onClick={(e) => props.onClick(hotel.id)} className="btn btn-primary" >Выбрать</button>
-        </div>
-    </li>);
-    const ul = <ul className="list-group">{markupList}</ul>;
-    return <div className="row">
-        <div className="col-9 col-sm-8" style={{ minWidth: "600px" }} >
-            <Filter />
-            {ul}
-        </div>
-    </div>;
-}
+    </div>
+};
 
 export default Home;

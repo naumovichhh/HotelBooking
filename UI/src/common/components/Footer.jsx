@@ -1,9 +1,12 @@
 import React from 'react';
+import Container from 'react-bootstrap/Container';
 
 const Footer = () => <>
-    <hr />
-    <footer>
-        <p>&copy; 2019 - Naumovich Raman</p>
+    <footer className="footer mt-auto py-3" >
+        <hr />
+        <Container>
+            <p>&copy; 2019 - Naumovich Raman</p>
+        </Container>
     </footer>
 </>
 

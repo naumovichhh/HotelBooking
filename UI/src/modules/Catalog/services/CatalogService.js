@@ -1,10 +1,10 @@
 import store from "rdx/store";
 import fetchHotels from "../actions";
 
-class HomeService {
+class CatalogService {
     static fetchHotels() {
         store.dispatch(fetchHotels());
     }
 }
 
-export default HomeService;
+export default CatalogService;

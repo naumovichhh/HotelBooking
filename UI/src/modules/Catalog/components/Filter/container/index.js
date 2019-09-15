@@ -10,7 +10,7 @@ class FilterContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {};
-    return { ...state.home.filter };
+    return { ...state.catalog.filter };
 }
 
 export default connect(mapStateToProps)(FilterContainer);

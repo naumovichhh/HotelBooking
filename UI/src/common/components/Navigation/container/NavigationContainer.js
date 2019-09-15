@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import Navigation from '../component/Navigation';
+import { connect } from 'react-redux';
 
 class NavigationContainer extends React.Component {
     onSelect = (key, e) => {
@@ -9,8 +10,10 @@ class NavigationContainer extends React.Component {
     };
 
     render() {
-        return <Navigation onSelect={this.onSelect} />;
+        return <Navigation onSelect={this.onSelect} auth={this.props.auth} />;
     }
 }
 
-export default withRouter(NavigationContainer);
+const mapStateToProps = (state) => ({ auth: state.auth });
+
+export default connect(mapStateToProps)(withRouter(NavigationContainer));
