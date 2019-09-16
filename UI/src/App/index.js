@@ -21,18 +21,18 @@ const App = () => {
                 <Navigation />
                 <br />
                 <main role="main" >
-                <Container>
-                    <Switch>
-                        <Route exact path="/home" component={Home} />
-                        <Route exact path="/catalog" component={Catalog} />
-                        <Route path="/hotel/:id" component={Hotel} />
-                        <Route exact path="/login" component={Login} />
-                        <Route exact path="/about" component={About} />
-                        <AuthorizedRoute exact role="admin" path="/admin" component={Admin} />
-                        <Redirect exact from="/" to="/home" />
-                        <Route component={NotFound} />
-                    </Switch>
-                </Container>
+                    <Container>
+                        <Switch>
+                            <Route exact path="/home" component={Home} />
+                            <Route exact path="/catalog" component={Catalog} />
+                            <Route path="/hotel/:id" component={Hotel} />
+                            <Route exact path="/login" component={Login} />
+                            <Route exact path="/about" component={About} />
+                            <AuthorizedRoute exact role="admin" path="/admin" component={Admin} />
+                            <Redirect exact from="/" to="/home" />
+                            <Route component={NotFound} />
+                        </Switch>
+                    </Container>
                 </main>
                 <Footer />
             </BrowserRouter>

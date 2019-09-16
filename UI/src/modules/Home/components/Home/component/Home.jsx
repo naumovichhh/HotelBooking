@@ -8,19 +8,19 @@ const Home = (props) => {
             <Form>
                 <Form.Group>
                     <Form.Label>Country</Form.Label>
-                    <Select onChange={props.onCountryChange} options={props.countries.map(c => ({ value: c, label: c }))} />
+                    <Select ref={props.selectRef} options={props.countries.map(c => ({ value: c, label: c }))} />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Locality</Form.Label>
-                    <Form.Control type="text" onChange={props.onLocalityChange} value={props.locality} />
+                    <Form.Control ref={props.localityRef} type="text" />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>From</Form.Label>
-                    <Form.Control type="date" value={props.from} />
+                    <Form.Control value={props.from} onChange={props.onFromChange} type="date" />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>To</Form.Label>
-                    <Form.Control type="date" value={props.to} />
+                    <Form.Control value={props.to} onChange={props.onToChange} type="date" />
                 </Form.Group>
                 <Button variant="primary" onClick={props.onSubmit}>
                     Search
