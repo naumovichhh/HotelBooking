@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Business_Logic.Repositories
+namespace Core.Repositories
 {
-    interface IHotelRepository
+    public interface IHotelRepository
     {
     }
 }

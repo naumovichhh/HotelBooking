@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Core;
+﻿using System.Collections.Generic;
+using Core.Entities;
 
-namespace Infrastructure
+namespace Infrastructure.Repositories
 {
     public class HotelsRepository
     {
