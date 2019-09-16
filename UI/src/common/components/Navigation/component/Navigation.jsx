@@ -9,7 +9,7 @@ const Navigation = (props) => <Navbar bg="primary" className="justify-content-be
         </Nav.Item>
         }
         <Nav.Item>
-            <Nav.Link href="" eventKey="catalog" onSelect={props.onSelect} >Catalog</Nav.Link>
+            <Nav.Link href="" eventKey="home" onSelect={props.onSelect} >Home</Nav.Link>
         </Nav.Item>
         <Nav.Item>
             <Nav.Link href="" eventKey="about" onSelect={props.onSelect} >About</Nav.Link>

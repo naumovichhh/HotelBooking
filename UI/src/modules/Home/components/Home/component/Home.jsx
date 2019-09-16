@@ -5,7 +5,8 @@ import Select from 'react-select';
 const Home = (props) => {
     return <div className="row" >
         <div className="col-10 col-md-6" >
-            <Form>
+            <Form>            
+                <h3>Find a place to stay </h3>
                 <Form.Group>
                     <Form.Label>Country</Form.Label>
                     <Select ref={props.selectRef} options={props.countries.map(c => ({ value: c, label: c }))} />

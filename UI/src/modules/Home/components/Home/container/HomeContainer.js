@@ -35,27 +35,49 @@ class HomeContainer extends React.Component {
 			return true;
 	}
 
-	checkoutLater(from, to) {
+	checkoutIsLater(from, to) {
 		return new Date(from).getTime()+1 < new Date(to).getTime();
 	}
 
+	withinTwoYears(date) {
+		if (new Date(date).getTime()-Date.now() < 365*2*msInDay)
+			return true;
+		else
+			return false;
+	}
+
+	isPast(date) {
+		if (new Date(date).getTime() < Date.now())
+			return true;
+		else
+			return false;
+	}
+
 	onFromChange = (e) => {
-		if (this.daysNotExcess(e.target.value, this.state.to))
-			if (this.checkoutLater(e.target.value, this.state.to))
-				this.setState({ from: e.target.value });
+		const value = e.target.value;
+		if (!this.withinTwoYears(value)) {
+			alert("It is too early for that");
+			return;
+		}
+		if (this.isPast(value)) {
+			return;
+		}
+		if (this.daysNotExcess(value, this.state.to))
+			if (this.checkoutIsLater(value, this.state.to))
+				this.setState({ from: value });
 			else
-				this.setState({ from: e.target.value, to: new Date(new Date(e.target.value).getTime()+1*msInDay).toISOString().slice(0, 10) });
+				this.setState({ from: value, to: new Date(new Date(value).getTime()+1*msInDay).toISOString().slice(0, 10) });
 		else {
-			this.setState({ from: e.target.value, to: new Date(new Date(e.target.value).getTime()+1*msInDay).toISOString().slice(0, 10) });
+			this.setState({ from: value, to: new Date(new Date(value).getTime()+1*msInDay).toISOString().slice(0, 10) });
 		}
 	};
 
 	onToChange = (e) => {
 		if (this.daysNotExcess(this.state.from, e.target.value))
-			if (this.checkoutLater(this.state.from, e.target.value))
+			if (this.checkoutIsLater(this.state.from, e.target.value))
 				this.setState({ to: e.target.value });
 			else
-				this.setState({ from: new Date(new Date(e.target.value).getTime()-1*msInDay).toISOString().slice(0, 10), to: e.target.value });
+				;
 		else {
 			alert("Duration of dwelling can not be longer than 30 days");
 		}
@@ -66,7 +88,8 @@ class HomeContainer extends React.Component {
 			return;
 		if (this.localityRef.current.value.search(/^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/) === -1)
 			return;
-		this.props.history.push(`/catalog?country=${this.selectRef.current.state.value.value}`);
+		this.props.history.push(`/catalog?country=${this.selectRef.current.state.value.value}&locality=${this.localityRef.current.value}`
+		                       +`&from=${this.state.from}&to=${this.state.to}`);
 	}
 
     render() {
