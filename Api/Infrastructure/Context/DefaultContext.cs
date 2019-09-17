@@ -8,7 +8,9 @@ namespace Infrastructure.Context
 {
     public class DefaultContext : DbContext
     {
-        public DbSet<HotelEntity> Hotels { get; set; }
+        public DbSet<HotelEntity> Hotel { get; set; }
+
+        // public DbSet<RoomEntity> Room { get; set; }
 
         public DefaultContext(DbContextOptions<DefaultContext> options) : base(options)
         {

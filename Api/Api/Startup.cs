@@ -1,5 +1,11 @@
-﻿using Core.Services;
+﻿using Api.ViewModels;
+using AutoMapper;
+using Core.DTO;
+using Core.Entities;
+using Core.Repositories;
+using Core.Services;
 using Infrastructure.Context;
+using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -24,12 +30,21 @@ namespace Api
         {
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DefaultContext>(options => options.UseSqlServer(connection));
-            services.AddScoped<IHotelService, HotelService>();
+            services.AddScoped<IHotelsRepository, HotelsRepository>();
+            services.AddScoped<IHotelsService, HotelsService>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new Info() { Title = "Booking Machine", Version = "v1" });
+                options.SwaggerDoc("V1", new Info() { Title = "Booking Machine", Version = "V1" });
             });
+
+            var mappingConfiguration = new MapperConfiguration(c =>
+            {
+                c.CreateMap<HotelDTO, HotelEntity>().ReverseMap();
+                c.CreateMap<HotelDTO, HotelViewModel>().ReverseMap();
+            });
+            var mapper = mappingConfiguration.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +58,9 @@ namespace Api
             {
                 app.UseHsts();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(options => options.SwaggerEndpoint("swagger/v1/swagger.json", "Swagger V1"));
 
             app.UseHttpsRedirection();
             app.UseMvc();

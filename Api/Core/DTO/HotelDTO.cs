@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace Core.Entities
+namespace Core.DTO
 {
-    public class HotelEntity
+    public class HotelDTO
     {
-        public HotelEntity(int id, string name, string address, string locality, string country, string picture)
+        public HotelDTO(int id, string name, string address, string locality, string country, string picture)
         {
             Id = id;
             Name = name ?? throw new ArgumentNullException(nameof(name));

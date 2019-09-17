@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Core.Entities
+namespace Api.ViewModels
 {
-    public class HotelEntity
+    public class HotelViewModel
     {
-        public HotelEntity(int id, string name, string address, string locality, string country, string picture)
+        public HotelViewModel(int id, string name, string address, string locality, string country, string picture)
         {
             Id = id;
             Name = name ?? throw new ArgumentNullException(nameof(name));

@@ -1,31 +1,37 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Core.Entities;
+using Core.Repositories;
+using Infrastructure.Context;
 
 namespace Infrastructure.Repositories
 {
-    public class HotelsRepository
+    public class HotelsRepository : IHotelsRepository
     {
-        private List<HotelEntity> _hotels = new List<HotelEntity>()
+        private DefaultContext _context;
+
+        public HotelsRepository(DefaultContext context)
         {
-            new HotelEntity(1, "Name", "Address", "Locality", "Country", "hotel.jpg")
-        };
+            this._context = context;
+        }
 
-        public IEnumerable<HotelEntity> GetAll() => _hotels;
+        public IEnumerable<HotelEntity> GetAll() => _context.Hotel.ToList();
 
-        public HotelEntity GetById(int id) => _hotels.Find(h => h.Id == id);
+        public HotelEntity GetById(int id) => _context.Hotel.Find(id);
 
         public HotelEntity Create(HotelEntity hotel)
         {
-            _hotels.Add(hotel);
-            return hotel;
+            var result = _context.Hotel.Add(hotel).Entity;
+            _context.SaveChanges();
+            return result;
         }
-
         public HotelEntity Update(HotelEntity hotel)
         {
-            int index = _hotels.FindIndex(h => h.Id == hotel.Id);
-            if (index != -1)
+            HotelEntity existing = _context.Hotel.Find(hotel.Id);
+            if (existing != null)
             {
-                _hotels[index] = hotel;
+                _context.Hotel.Update(hotel);
+                _context.SaveChanges();
                 return hotel;
             }
             else
@@ -34,15 +40,9 @@ namespace Infrastructure.Repositories
 
         public HotelEntity Delete(int id)
         {
-            int index = _hotels.FindIndex(h => h.Id == id);
-            if (index != -1)
-            {
-                var hotel = _hotels[index];
-                _hotels.RemoveAt(index);
-                return hotel;
-            }
-            else
-                return null;
+            var result = _context.Hotel.Remove(_context.Hotel.Find(id)).Entity;
+            _context.SaveChanges();
+            return result;
         }
     }
 }
