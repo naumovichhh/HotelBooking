@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Core.Entities;
 
 namespace Core.Repositories
 {
     public interface IHotelsRepository
     {
-        IEnumerable<HotelEntity> GetAll();
+        Task<IEnumerable<HotelEntity>> GetAllAsync();
 
-        HotelEntity GetById(int id);
+        Task<HotelEntity> GetByIdAsync(int id);
 
-        HotelEntity Create(HotelEntity hotel);
+        Task<HotelEntity> CreateAsync(HotelEntity hotel);
 
-        HotelEntity Update(HotelEntity hotel);
+        Task<HotelEntity> UpdateAsync(HotelEntity hotel);
 
-        HotelEntity Delete(int id);
+        Task<HotelEntity> DeleteAsync(int id);
     }
 }

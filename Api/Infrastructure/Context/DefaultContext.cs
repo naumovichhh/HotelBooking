@@ -17,20 +17,22 @@ namespace Infrastructure.Context
         {
         }
 
-        public virtual DbSet<AdditionalServiceEntity> AdditionalService { get; set; }
-        public virtual DbSet<BookingEntity> Booking { get; set; }
-        public virtual DbSet<BookingServiceEntity> BookingService { get; set; }
-        public virtual DbSet<HotelEntity> Hotel { get; set; }
-        public virtual DbSet<RoomEntity> Room { get; set; }
-        public virtual DbSet<RoomFeatureEntity> RoomFeature { get; set; }
-        public virtual DbSet<RoomTypeEntity> RoomType { get; set; }
-        public virtual DbSet<RoomTypeRoomFeatureEntity> RoomTypeRoomFeature { get; set; }
-        public virtual DbSet<UserEntity> User { get; set; }
+        public virtual DbSet<AdditionalServiceEntity> AdditionalServices { get; set; }
+        public virtual DbSet<BookingEntity> Bookings { get; set; }
+        public virtual DbSet<BookingServiceEntity> BookingServices { get; set; }
+        public virtual DbSet<HotelEntity> Hotels { get; set; }
+        public virtual DbSet<RoomEntity> Rooms { get; set; }
+        public virtual DbSet<RoomFeatureEntity> RoomFeatures { get; set; }
+        public virtual DbSet<RoomTypeEntity> RoomTypes { get; set; }
+        public virtual DbSet<RoomTypeRoomFeatureEntity> RoomTypeRoomFeatures { get; set; }
+        public virtual DbSet<UserEntity> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AdditionalServiceEntity>(entity =>
             {
+                entity.ToTable("AdditionalService");
+
                 entity.Property(e => e.Description).HasMaxLength(100);
 
                 entity.Property(e => e.Name)
@@ -46,6 +48,8 @@ namespace Infrastructure.Context
 
             modelBuilder.Entity<BookingEntity>(entity =>
             {
+                entity.ToTable("Booking");
+
                 entity.Property(e => e.From).HasColumnType("date");
 
                 entity.Property(e => e.To).HasColumnType("date");
@@ -88,6 +92,8 @@ namespace Infrastructure.Context
 
             modelBuilder.Entity<HotelEntity>(entity =>
             {
+                entity.ToTable("Hotel");
+
                 entity.Property(e => e.Address)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -111,6 +117,8 @@ namespace Infrastructure.Context
 
             modelBuilder.Entity<RoomEntity>(entity =>
             {
+                entity.ToTable("Room");
+
                 entity.HasOne(d => d.TypeNavigation)
                     .WithMany(p => p.Rooms)
                     .HasForeignKey(d => d.Type)
@@ -120,6 +128,8 @@ namespace Infrastructure.Context
 
             modelBuilder.Entity<RoomFeatureEntity>(entity =>
             {
+                entity.ToTable("RoomFeature");
+
                 entity.Property(e => e.Description)
                     .IsRequired()
                     .HasMaxLength(100);
@@ -127,6 +137,8 @@ namespace Infrastructure.Context
 
             modelBuilder.Entity<RoomTypeEntity>(entity =>
             {
+                entity.ToTable("RoomType");
+
                 entity.Property(e => e.BedsDescription)
                     .IsRequired()
                     .HasMaxLength(50);
@@ -167,6 +179,8 @@ namespace Infrastructure.Context
 
             modelBuilder.Entity<UserEntity>(entity =>
             {
+                entity.ToTable("User");
+
                 entity.HasKey(e => e.Name);
 
                 entity.Property(e => e.Name).HasMaxLength(30);

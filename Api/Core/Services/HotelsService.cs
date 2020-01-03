@@ -20,14 +20,14 @@ namespace Core.Services
             _mapper = mapper;
         }
 
-        public IEnumerable<HotelDTO> GetAll() => _mapper.Map<IEnumerable<HotelDTO>>(_hotelRepository.GetAll());
+        public async Task<IEnumerable<HotelDTO>> GetAllAsync() => _mapper.Map<IEnumerable<HotelDTO>>(await _hotelRepository.GetAllAsync());
 
-        public HotelDTO GetById(int id) => _mapper.Map<HotelDTO>(_hotelRepository.GetById(id));
+        public async Task<HotelDTO> GetByIdAsync(int id) => _mapper.Map<HotelDTO>(await _hotelRepository.GetByIdAsync(id));
 
-        public HotelDTO Create(HotelDTO hotel) => _mapper.Map<HotelDTO>(_hotelRepository.Create(_mapper.Map<HotelEntity>(hotel)));
+        public async Task<HotelDTO> CreateAsync(HotelDTO hotel) => _mapper.Map<HotelDTO>(await _hotelRepository.CreateAsync(_mapper.Map<HotelEntity>(hotel)));
 
-        public HotelDTO Update(HotelDTO hotel) => _mapper.Map<HotelDTO>(_hotelRepository.Update(_mapper.Map<HotelEntity>(hotel)));
+        public async Task<HotelDTO> UpdateAsync(HotelDTO hotel) => _mapper.Map<HotelDTO>(await _hotelRepository.UpdateAsync(_mapper.Map<HotelEntity>(hotel)));
 
-        public HotelDTO Delete(int id) => _mapper.Map<HotelDTO>(_hotelRepository.Delete(id));
+        public async Task<HotelDTO> DeleteAsync(int id) => _mapper.Map<HotelDTO>(await _hotelRepository.DeleteAsync(id));
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Core.Entities;
 using Core.DTO;
 
@@ -6,10 +7,10 @@ namespace Core.Services
 {
     public interface IHotelsService
     {
-        IEnumerable<HotelDTO> GetAll();
-        HotelDTO GetById(int id);
-        HotelDTO Create(HotelDTO hotel);
-        HotelDTO Update(HotelDTO hotel);
-        HotelDTO Delete(int id);
+        Task<IEnumerable<HotelDTO>> GetAllAsync();
+        Task<HotelDTO> GetByIdAsync(int id);
+        Task<HotelDTO> CreateAsync(HotelDTO hotel);
+        Task<HotelDTO> UpdateAsync(HotelDTO hotel);
+        Task<HotelDTO> DeleteAsync(int id);
     }
 }

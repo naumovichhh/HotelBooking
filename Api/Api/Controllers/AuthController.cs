@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Services;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -12,18 +13,25 @@ namespace Api.Controllers
     [ApiController]
     public class AuthController : Controller
     {
+        private IUserService _userService;
+
+        public AuthController()
+        {
+
+        }
+
         // GET: api/<controller>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IAsyncResult> Get()
         {
-            return new string[] { "value1", "value2" };
+            
         }
 
         // GET api/<controller>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IAsyncResult> Get(int id)
         {
-            return "value";
+            return 
         }
 
         // POST api/<controller>

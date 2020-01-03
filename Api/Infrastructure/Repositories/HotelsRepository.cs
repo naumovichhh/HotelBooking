@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Core.Entities;
 using Core.Repositories;
 using Infrastructure.Context;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
@@ -15,33 +17,37 @@ namespace Infrastructure.Repositories
             this._context = context;
         }
 
-        public IEnumerable<HotelEntity> GetAll() => _context.Hotel.ToList();
+        public async Task<IEnumerable<HotelEntity>> GetAllAsync() => await _context.Hotels.ToListAsync();
 
-        public HotelEntity GetById(int id) => _context.Hotel.Find(id);
+        public async Task<HotelEntity> GetByIdAsync(int id) => await _context.Hotels.FindAsync(id);
 
-        public HotelEntity Create(HotelEntity hotel)
+        public async Task<HotelEntity> CreateAsync(HotelEntity hotel)
         {
-            var result = _context.Hotel.Add(hotel).Entity;
-            _context.SaveChanges();
+            var result = (await _context.Hotels.AddAsync(hotel)).Entity;
+            await _context.SaveChangesAsync();
             return result;
         }
-        public HotelEntity Update(HotelEntity hotel)
+        public async Task<HotelEntity> UpdateAsync(HotelEntity hotel)
         {
-            HotelEntity existing = _context.Hotel.Find(hotel.Id);
+            HotelEntity existing = await _context.Hotels.FindAsync(hotel.Id);
             if (existing != null)
             {
-                _context.Hotel.Update(hotel);
-                _context.SaveChanges();
+                _context.Hotels.Update(hotel);
+                await _context.SaveChangesAsync();
                 return hotel;
             }
             else
                 return null;
         }
 
-        public HotelEntity Delete(int id)
+        public async Task<HotelEntity> DeleteAsync(int id)
         {
-            var result = _context.Hotel.Remove(_context.Hotel.Find(id)).Entity;
-            _context.SaveChanges();
+            var entity = await _context.Hotels.FindAsync(id);
+            if (entity == null)
+                return null;
+            var result = _context.Hotels.Remove(entity).Entity;
+            await _context.SaveChangesAsync();
+
             return result;
         }
     }

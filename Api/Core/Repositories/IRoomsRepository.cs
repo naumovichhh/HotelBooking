@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Core.Entities;
 
 namespace Core.Repositories
 {
     public interface IRoomsRepository
     {
-        RoomEntity Get(int id);
+        Task<RoomEntity> GetByIdAsync(int id);
 
-        IEnumerable<RoomEntity> Get();
+        Task<IEnumerable<RoomEntity>> GetAllAsync();
 
-        RoomEntity Create(RoomEntity room);
+        Task<RoomEntity> CreateAsync(RoomEntity room);
 
-        RoomEntity Update(RoomEntity room);
+        Task<RoomEntity> UpdateAsync(RoomEntity room);
 
-        RoomEntity Delete(int id);
+        Task<RoomEntity> DeleteAsync(int id);
     }
 }
