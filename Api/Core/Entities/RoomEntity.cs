@@ -1,15 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Core.Entities
 {
-    public class RoomEntity
+    public partial class RoomEntity
     {
-        public int Hotel { get; set; }
+        public RoomEntity()
+        {
+            Bookings = new HashSet<BookingEntity>();
+        }
 
+        public int Id { get; set; }
+        public int Type { get; set; }
         public int Number { get; set; }
 
-        public int Type { get; set; }
+        public virtual RoomTypeEntity TypeNavigation { get; set; }
+        public virtual ICollection<BookingEntity> Bookings { get; set; }
     }
 }

@@ -1,33 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Core.Entities
 {
-    public class HotelEntity
+    public partial class HotelEntity
     {
-        public HotelEntity(int id, string name, string address, string locality, string country, string picture)
+        public HotelEntity()
         {
-            Id = id;
-            Name = name ?? throw new ArgumentNullException(nameof(name));
-            Address = address ?? throw new ArgumentNullException(nameof(address));
-            Locality = locality ?? throw new ArgumentNullException(nameof(locality));
-            Country = country ?? throw new ArgumentNullException(nameof(country));
-            Picture = picture ?? throw new ArgumentNullException(nameof(picture));
+            AdditionalServices = new HashSet<AdditionalServiceEntity>();
+            RoomTypes = new HashSet<RoomTypeEntity>();
         }
 
         public int Id { get; set; }
-
-        public string Name { get; set; }
-
-        public string Address { get; set; }
-
-        public string Locality { get; set; }
-
         public string Country { get; set; }
-
+        public string Locality { get; set; }
+        public string Address { get; set; }
+        public string Name { get; set; }
         public string Picture { get; set; }
+
+        public virtual ICollection<AdditionalServiceEntity> AdditionalServices { get; set; }
+        public virtual ICollection<RoomTypeEntity> RoomTypes { get; set; }
     }
 }

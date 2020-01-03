@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Api
@@ -28,14 +30,15 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthorization();
+            services.AddAuthentication();
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DefaultContext>(options => options.UseSqlServer(connection));
             services.AddScoped<IHotelsRepository, HotelsRepository>();
             services.AddScoped<IHotelsService, HotelsService>();
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("V1", new Info() { Title = "Booking Machine", Version = "V1" });
+                options.SwaggerDoc("V1", new OpenApiInfo() { Title = "Booking Machine", Version = "V1" });
             });
 
             var mappingConfiguration = new MapperConfiguration(c =>
@@ -45,10 +48,11 @@ namespace Api
             });
             var mapper = mappingConfiguration.CreateMapper();
             services.AddSingleton(mapper);
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -63,7 +67,16 @@ namespace Api
             app.UseSwaggerUI(options => options.SwaggerEndpoint("swagger/v1/swagger.json", "Swagger V1"));
 
             app.UseHttpsRedirection();
-            app.UseMvc();
+
+            app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+            
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
         }
     }
 }
