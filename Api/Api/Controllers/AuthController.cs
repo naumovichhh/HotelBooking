@@ -2,54 +2,62 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Core.Services;
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Api.ViewModels;
+using Core.Services;
+using Core.DTO;
 
 namespace Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController : Controller
+    public class AuthController : ControllerBase
     {
-        private IUserService _userService;
+        private IMapper _mapper;
+        private IAuthService _service;
 
-        public AuthController()
+        public AuthController(IMapper mapper, IAuthService service)
         {
-
+            _mapper = mapper;
+            _service = service;
         }
 
-        // GET: api/<controller>
-        [HttpGet]
-        public async Task<IAsyncResult> Get()
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody]UserViewModel user)
         {
-            
+            var dto = _mapper.Map<UserDTO>(user);
+            dto.Role = "user";
+            string name = await _service.RegisterAsync(dto);
+            if (name != null)
+                return Ok();
+            else
+                return Conflict();
         }
 
-        // GET api/<controller>/5
-        [HttpGet("{id}")]
-        public async Task<IAsyncResult> Get(int id)
+        [HttpPost("register/admin")]
+        [Authorize(Roles = "admin")]
+        public async Task<IActionResult> RegisterAdmin([FromBody]UserViewModel admin)
         {
-            return 
+            var dto = _mapper.Map<UserDTO>(admin);
+            dto.Role = "admin";
+            string name = await _service.RegisterAsync(dto);
+            if (name != null)
+                return Ok(name);
+            else
+                return Conflict();
         }
 
-        // POST api/<controller>
-        [HttpPost]
-        public void Post([FromBody]string value)
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(string name, string password)
         {
-        }
-
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            var userToken = await _service.LoginAsync(name, password);
+            if (userToken != null)
+                return Ok("userToken");
+            else
+                return Unauthorized();
         }
     }
 }

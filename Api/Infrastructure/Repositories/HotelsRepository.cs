@@ -32,9 +32,9 @@ namespace Infrastructure.Repositories
             HotelEntity existing = await _context.Hotels.FindAsync(hotel.Id);
             if (existing != null)
             {
-                _context.Hotels.Update(hotel);
+                var entry = _context.Hotels.Update(hotel);
                 await _context.SaveChangesAsync();
-                return hotel;
+                return entry.Entity;
             }
             else
                 return null;
@@ -47,7 +47,6 @@ namespace Infrastructure.Repositories
                 return null;
             var result = _context.Hotels.Remove(entity).Entity;
             await _context.SaveChangesAsync();
-
             return result;
         }
     }

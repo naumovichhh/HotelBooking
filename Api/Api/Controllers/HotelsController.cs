@@ -14,8 +14,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Controllers
 {
+    [ApiController]
     [Route("api/[controller]")]
-    public class HotelsController : Controller
+    public class HotelsController : ControllerBase
     {
         private IHotelsService _hotelsService;
         private IMapper _mapper;

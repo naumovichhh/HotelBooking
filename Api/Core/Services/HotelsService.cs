@@ -20,7 +20,7 @@ namespace Core.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<HotelDTO>> GetAllAsync() => _mapper.Map<IEnumerable<HotelDTO>>(await _hotelRepository.GetAllAsync());
+        public async Task<IEnumerable<HotelDTO>> GetAllAsync() => _mapper.Map<List<HotelDTO>>(await _hotelRepository.GetAllAsync());
 
         public async Task<HotelDTO> GetByIdAsync(int id) => _mapper.Map<HotelDTO>(await _hotelRepository.GetByIdAsync(id));
 

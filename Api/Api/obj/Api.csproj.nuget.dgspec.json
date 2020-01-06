@@ -49,6 +49,18 @@
               "target": "Package",
               "version": "[9.0.0, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "Microsoft.Extensions.Logging.Debug": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.0.0-rc4, )"
@@ -113,6 +125,18 @@
             "AutoMapper": {
               "target": "Package",
               "version": "[9.0.0, )"
+            },
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[3.2.1, )"
+            },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[5.6.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[5.6.0, )"
             }
           },
           "imports": [
@@ -200,6 +224,9 @@
           "assetTargetFallback": true,
           "warn": true,
           "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
