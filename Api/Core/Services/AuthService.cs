@@ -17,7 +17,7 @@ namespace Core.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly string constSalt = "25z2oKjK433ooJ";
+        private readonly string ConstSalt = "25z2oKjK433ooJ";
         private IMapper _mapper;
         private IUsersRepository _repository;
 
@@ -38,9 +38,11 @@ namespace Core.Services
                 return null;
 
             DateTime dt = DateTime.Now;
+            var ticks = dt.Ticks.ToString();
             var entity = _mapper.Map<UserEntity>(user);
             entity.RegistrationTime = dt;
-            var cryptedPassword = BCrypt.Net.BCrypt.HashPassword(entity.Password+constSalt, dt.Ticks.ToString());
+            entity.Salt = BCrypt.Net.BCrypt.GenerateSalt();
+            var cryptedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password+ConstSalt, entity.Salt);
             entity.Password = cryptedPassword;
             var result = _mapper.Map<UserDTO>(await _repository.CreateAsync(entity));
             if (result == null) return null;
@@ -77,9 +79,13 @@ namespace Core.Services
             if (entity == null)
                 return null;
 
-            var cryptedPassword = BCrypt.Net.BCrypt.HashPassword(password+constSalt, entity.RegistrationTime.Ticks.ToString());
-            if (cryptedPassword != entity.Password)
+            //var cryptedPassword = BCrypt.Net.BCrypt.HashPassword(password+constSalt, entity.RegistrationTime.Ticks.ToString());
+            //if (cryptedPassword != entity.Password)
+            //    return null;
+            if (!BCrypt.Net.BCrypt.Verify(password + ConstSalt, entity.Password))
+            {
                 return null;
+            }
 
             var claims = new List<Claim>
             {

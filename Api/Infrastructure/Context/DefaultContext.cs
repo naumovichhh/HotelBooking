@@ -191,9 +191,12 @@ namespace Infrastructure.Context
 
                 entity.Property(e => e.Password)
                     .IsRequired()
-                    .HasMaxLength(30);
+                    .HasMaxLength(60);
 
                 entity.Property(e => e.RegistrationTime).HasColumnType("datetime");
+                entity.Property(e => e.Salt)
+                    .IsRequired()
+                    .HasMaxLength(40);
 
                 entity.Property(e => e.Role)
                     .IsRequired()

@@ -15,6 +15,7 @@ namespace Core.Entities
         public string Password { get; set; }
         public string Email { get; set; }
         public DateTime RegistrationTime { get; set; }
+        public string Salt { get; set; }
 
         public virtual ICollection<BookingEntity> Bookings { get; set; }
     }

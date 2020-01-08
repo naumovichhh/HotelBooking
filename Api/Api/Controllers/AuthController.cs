@@ -32,7 +32,7 @@ namespace Api.Controllers
             dto.Role = "user";
             string name = await _service.RegisterAsync(dto);
             if (name != null)
-                return Ok();
+                return Ok(name);
             else
                 return Conflict();
         }
@@ -51,11 +51,12 @@ namespace Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login(string name, string password)
+        public async Task<IActionResult> Login([FromBody]UserViewModel credentials)
         {
+            string name = credentials.Name, password = credentials.Password;
             var userToken = await _service.LoginAsync(name, password);
             if (userToken != null)
-                return Ok("userToken");
+                return Ok(userToken);
             else
                 return Unauthorized();
         }
