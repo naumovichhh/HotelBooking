@@ -9,11 +9,11 @@ const Home = (props) => {
                 <h3>Find a place to stay </h3>
                 <Form.Group>
                     <Form.Label>Country</Form.Label>
-                    <Select ref={props.selectRef} options={props.countries.map(c => ({ value: c, label: c }))} />
+                    <Select value={{ label: props.country, value: props.country }} onChange={props.onCountryChange} options={props.countries.map(c => ({ value: c, label: c }))} />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Locality</Form.Label>
-                    <Form.Control ref={props.localityRef} type="text" />
+                    <Form.Control value={props.locality} onChange={props.onLocalityChange} type="text" />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>From</Form.Label>
@@ -22,6 +22,14 @@ const Home = (props) => {
                 <Form.Group>
                     <Form.Label>To</Form.Label>
                     <Form.Control value={props.to} onChange={props.onToChange} type="date" />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Adult places</Form.Label>
+                    <Form.Control value={props.adult} onChange={props.onAdultChange} type="number" />
+                </Form.Group>
+                <Form.Group>
+                    <Form.Label>Child places</Form.Label>
+                    <Form.Control value={props.child} onChange={props.onChildChange} type="number" />
                 </Form.Group>
                 <Button variant="primary" onClick={props.onSubmit}>
                     Search

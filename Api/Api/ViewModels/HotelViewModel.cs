@@ -7,16 +7,6 @@ namespace Api.ViewModels
 {
     public class HotelViewModel
     {
-        public HotelViewModel(int id, string name, string address, string locality, string country, string picture)
-        {
-            Id = id;
-            Name = name ?? throw new ArgumentNullException(nameof(name));
-            Address = address ?? throw new ArgumentNullException(nameof(address));
-            Locality = locality ?? throw new ArgumentNullException(nameof(locality));
-            Country = country ?? throw new ArgumentNullException(nameof(country));
-            Picture = picture ?? throw new ArgumentNullException(nameof(picture));
-        }
-
         public int Id { get; set; }
 
         public string Name { get; set; }
@@ -28,5 +18,7 @@ namespace Api.ViewModels
         public string Country { get; set; }
 
         public string Picture { get; set; }
+
+        public int Stars { get; set; }
     }
 }

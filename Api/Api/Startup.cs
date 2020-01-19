@@ -69,6 +69,7 @@ namespace Api
             var mapper = mappingConfiguration.CreateMapper();
             services.AddSingleton(mapper);
             services.AddControllers();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -87,6 +88,8 @@ namespace Api
             app.UseSwaggerUI(options => options.SwaggerEndpoint("swagger/v1/swagger.json", "Swagger V1"));
 
             app.UseHttpsRedirection();
+
+            app.UseCors(builder => builder.AllowAnyOrigin());
 
             app.UseRouting();
 

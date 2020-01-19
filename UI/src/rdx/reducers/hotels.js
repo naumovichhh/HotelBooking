@@ -1,3 +1,3 @@
-import hotels from 'modules/Admin/reducers';
+import hotels from 'modules/Catalog/reducers';
 
 export default hotels;

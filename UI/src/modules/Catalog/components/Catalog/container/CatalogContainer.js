@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import Catalog from '../component/Catalog';
-import CatalogService from '../../../services/CatalogService';
+import fetchHotelsAction from '../../../actions';
 
 class CatalogContainer extends React.Component {
     componentDidMount() {
-        CatalogService.fetchHotels();
+        this.props.fetchHotels(this.props.search);
     }
 
     onClick = (id) => {
@@ -16,10 +16,15 @@ class CatalogContainer extends React.Component {
         return <Catalog
             hotelsList={this.props.list}
             fulfilled={this.props.fulfilled}
+            failed={this.props.failed}
+            inProcess={this.props.inProcess}
             onClick={this.onClick} />
     }
 }
 
-const mapStateToProps = (state) => ({ ...state.hotels });
+const mapState = (state) => ({ ...state.hotels, search: state.search });
+const mapDispatch = dispatch => ({
+    fetchHotels: (params) => { dispatch(fetchHotelsAction(params)); }
+});
 
-export default connect(mapStateToProps)(CatalogContainer);
+export default connect(mapState, mapDispatch)(CatalogContainer);

@@ -32,7 +32,10 @@ function fetchHotels() {
             method: "GET",
             url: "api/hotels",
         })
-        .then(data => dispatch(success(data)));
+        .then(data => {
+            alert(data);
+            dispatch(success(data));
+        });
     }
 }
 

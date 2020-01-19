@@ -1,4 +1,4 @@
-import requestMock from 'requestMock';
+import request from 'requestMock';
 
 const GET_HOTELS_REQUEST = "GET_HOTELS_REQUEST";
 const GET_HOTELS_SUCCESS = "GET_HOTELS_SUCCESS";
@@ -19,21 +19,32 @@ function success(hotels) {
     };
 }
 
-function failure(hotels) {
+function failure() {
     return {
         type: GET_HOTELS_FAILURE
     };
 }
 
-function fetchHotels() {
-    return dispatch => {
+function fetchHotels(params) {
+    return async dispatch => {
         dispatch(_request());
-        requestMock({
-            method: "GET",
-            url: "api/hotels",
-        })
-        .then(data => dispatch(success(data)));
-    }
+        try {
+            let response = await request({
+                method: "GET",
+                url: "api/hotels"+"?"+paramsToQuery(params)
+            });
+            if (response.ok) dispatch(success(await response.json()));
+            else throw new Error(response.statusText);
+        }
+        catch {
+            dispatch(failure());
+        }
+    };
 }
 
-export default fetchHotels;
+function paramsToQuery(params) {
+    return `country=${params.country}&locality=${params.locality}&from=${params.from}
+&to=${params.to}&adult=${params.adult}&child=${params.child}`;
+}
+
+export { fetchHotels };

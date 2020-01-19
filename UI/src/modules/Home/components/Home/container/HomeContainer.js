@@ -1,5 +1,7 @@
 import React from 'react';
 import Home from '../component/Home';
+import { connect } from 'react-redux';
+import setSearchParameters from 'modules/Search/actions';
 
 const msInDay = 24*3600*1000;
 
@@ -22,9 +24,20 @@ class HomeContainer extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.selectRef = React.createRef();
-		this.localityRef = React.createRef();
-		this.state = { from: new Date(Date.now() + 1*msInDay).toISOString().slice(0, 10), to: new Date(Date.now() + 2*msInDay).toISOString().slice(0, 10) };
+		if (props.search.country) {
+			this.state = {
+				...props.search
+			}
+		} else {
+			this.state = { 
+				country: null,
+				locality: '',
+				from: new Date(Date.now() + 1*msInDay).toISOString().slice(0, 10),
+				to: new Date(Date.now() + 2*msInDay).toISOString().slice(0, 10),
+				adult: 1,
+				child: 0
+			};
+		}
 	}
 
 	daysNotExcess(from, to) {
@@ -81,29 +94,76 @@ class HomeContainer extends React.Component {
 		else {
 			alert("Duration of dwelling can not be longer than 30 days");
 		}
-	}
+	};
+
+	onAdultChange = (e) => {
+		let value = e.target.value;
+		if (value <= 10 && value >= 1)
+			this.setState({ adult: value });
+	};
+
+	onChildChange = (e) => {
+		let value = e.target.value;
+		if (value <= 10 && value >= 0 && value)
+			this.setState({ child: value });
+	};
+
+	onCountryChange = (e) => {
+		this.setState({ country: e.value });
+	};
+
+	onLocalityChange = (e) => {
+		let value = e.target.value;
+		this.setState({ locality: value });
+	};
 	
 	onSubmit = (e) => {
-		if (!this.countries.includes(this.selectRef.current.state.value.value))
+		if (!this.state.country)
+		{
+			alert("Choose country");
 			return;
-		if (this.localityRef.current.value.search(/^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/) === -1)
+		}
+		if (!this.state.locality)
+		{
+			alert("Enter locality");
 			return;
-		this.props.history.push(`/catalog?country=${this.selectRef.current.state.value.value}&locality=${this.localityRef.current.value}`
-		                       +`&from=${this.state.from}&to=${this.state.to}`);
-	}
+		}
+		if (this.state.locality.search(/^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/) === -1)
+		{
+			alert("Enter valid locality");
+			return;
+		}
+
+		this.props.setSearchParameters({
+			country: this.state.country,
+			locality: this.state.locality,
+			from: this.state.from,
+			to: this.state.to,
+			adult: this.state.adult,
+			child: this.state.child
+		});
+		this.props.history.push('/catalog');
+	};
 
     render() {
         return <Home countries={this.countries}
 					 onCountryChange={this.onCountryChange}
-					 selectRef={this.selectRef}
-					 localityRef={this.localityRef}
-					 from={this.state.from}
-					 to={this.state.to}
+					 onLocalityChange={this.onLocalityChange}
 					 onFromChange={this.onFromChange}
 					 onToChange={this.onToChange}
+					 onAdultChange={this.onAdultChange}
+					 onChildChange={this.onChildChange}
 					 onSubmit={this.onSubmit}
                      {...this.state} />;
     }
 }
 
-export default HomeContainer;
+const mapState = state => {
+	return { search: state.search };
+};
+
+const mapDispatch = {
+	setSearchParameters
+};
+
+export default connect(mapState, mapDispatch)(HomeContainer);

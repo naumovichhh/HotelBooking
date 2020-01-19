@@ -27,14 +27,12 @@ namespace Api.Controllers
             _mapper = mapper;
         }
 
-        // GET: api/<controller>
         [HttpGet]
-        public async Task<IActionResult> Get()
+        public async Task<IActionResult> Get(string country, string locality, DateTime from, DateTime to, int adult, int child)
         {
-            return Ok(await _hotelsService.GetAllAsync());
+            return Ok(await _hotelsService.GetBySearchAsync(country, locality, from, to, adult, child));
         }
 
-        // GET api/<controller>/5
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
@@ -45,7 +43,6 @@ namespace Api.Controllers
                 return NotFound();
         }
 
-        // POST api/<controller>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]HotelViewModel hotel)
         {
@@ -53,7 +50,6 @@ namespace Api.Controllers
             return Created($"/api/hotels/{result.Id}", result);
         }
 
-        // PUT api/<controller>/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody]HotelViewModel hotel)
         {
@@ -66,7 +62,6 @@ namespace Api.Controllers
                 return NotFound();
         }
 
-        // DELETE api/<controller>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

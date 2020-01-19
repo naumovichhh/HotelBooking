@@ -17,6 +17,7 @@ namespace Core.Entities
         public string Address { get; set; }
         public string Name { get; set; }
         public string Picture { get; set; }
+        public int Stars { get; set; }
 
         public virtual ICollection<AdditionalServiceEntity> AdditionalServices { get; set; }
         public virtual ICollection<RoomTypeEntity> RoomTypes { get; set; }

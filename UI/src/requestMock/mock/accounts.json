@@ -1,8 +1,0 @@
-{
-    "accounts":
-    [
-        { "login": "user@gmail.com", "password": "11111111", "role": "user" },
-        { "login": "qwerty@mail.ru", "password": "PASSWORD", "role": "user" },
-        { "login": "admin@admin.com", "password": "admin123", "role": "admin" }
-    ]
-}

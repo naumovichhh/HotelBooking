@@ -17,5 +17,7 @@ namespace Core.DTO
         public string Country { get; set; }
 
         public string Picture { get; set; }
+
+        public int Stars { get; set; }
     }
 }

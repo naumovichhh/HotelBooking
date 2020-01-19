@@ -1,4 +1,4 @@
-import request from 'requestMock';
+import request from 'request';
 import store from 'rdx/store';
 
 const AUTHORIZATION_REQUEST = "AUTHORIZATION_REQUEST";
@@ -32,7 +32,7 @@ function authorize(credentials) {
         request({
             method: "POST",
             url: "api/auth",
-            payload: credentials
+            body: JSON.stringify(credentials)
         })
         .then(result => {
             if (result.authorized)

@@ -1,20 +1,24 @@
 import React from 'react';
-import Filter from '../../Filter';
-import { Spinner } from 'react-bootstrap';
+import Search from '../../Search';
+import { Spinner, Alert } from 'react-bootstrap';
 
 function Catalog(props) {
-    if (!props.fulfilled) {
-        return <div>
+    if (props.inProcess) return <div>
             <Spinner animation="border" />
+        </div>; 
+    if (props.failed) return <div>
+            <Alert variant="danger">
+                <Alert.Heading>Loading failed</Alert.Heading>
+            </Alert>
         </div>;
-    }
+    if (!props.fulfilled) return null;
 
     const markupList = props.hotelsList.map(hotel => <li key={hotel.name} className="list-group-item d-flex align-items-center">
         <div className="image-parent" style={{ maxWidth: "100px", maxHeight: "100px" }} >
-            <img src={hotel.image} className="img-fluid" alt="lay" />
+            <img src={hotel.picture} className="img-fluid" alt="lay" />
         </div>
         <div className="ml-4" >
-            <h2><a href="/controller/action" onClick={(e) => { e.preventDefault(); props.onClick(hotel.id) }}>{hotel.name}</a></h2>
+            <h2><a href="/inactive" onClick={(e) => { e.preventDefault(); props.onClick(hotel.id) }}>{hotel.name}</a></h2>
             <h6>{hotel.locality}, {hotel.country}</h6>
         </div>
         <div style={{ position: "absolute", right: "20px" }} >
@@ -24,8 +28,8 @@ function Catalog(props) {
     const ul = <ul className="list-group">{markupList}</ul>;
     return <div className="row">
         <div className="col-9 col-sm-8" style={{ minWidth: "600px" }} >
-            <Filter />
-            {ul}
+            <Search />
+            {markupList.length ? ul : <Alert variant="info"><Alert.Heading>There are no matching offers</Alert.Heading></Alert>}
         </div>
     </div>;
 }
