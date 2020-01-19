@@ -1,3 +1,1 @@
-import Navigation from './container/NavigationContainer';
-
-export default Navigation;
+export { default } from './container/NavigationContainer';

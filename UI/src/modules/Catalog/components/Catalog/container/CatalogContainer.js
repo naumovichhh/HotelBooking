@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import React from 'react';
 import Catalog from '../component/Catalog';
-import fetchHotelsAction from '../../../actions';
+import { fetchHotels as fetchHotelsAction } from '../../../actions';
 
 class CatalogContainer extends React.Component {
     componentDidMount() {

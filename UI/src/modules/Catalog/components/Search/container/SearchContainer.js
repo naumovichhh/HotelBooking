@@ -1,7 +1,7 @@
 import React from 'react';
 import Search from '../component/Search';
 import { connect } from 'react-redux';
-import fetchHotelsAction from '../../../actions';
+import { fetchHotels as fetchHotelsAction } from '../../../actions';
 import setSearchParametersAction from 'modules/Search/actions';
 
 const msInDay = 24*3600*1000;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import Select from 'react-select';
+import Autosuggest from 'common/components/Autosuggest';
 
 const Home = (props) => {
     return <div className="row" >
@@ -13,7 +14,7 @@ const Home = (props) => {
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Locality</Form.Label>
-                    <Form.Control value={props.locality} onChange={props.onLocalityChange} type="text" />
+                    <Autosuggest value={props.locality} country={props.country} onChange={props.onLocalityChange} />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>From</Form.Label>
