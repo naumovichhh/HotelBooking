@@ -9,9 +9,9 @@ import About from 'common/components/About';
 import Footer from 'common/components/Footer';
 import Navigation from 'common/components/Navigation';
 import NotFound from 'common/components/NotFound';
-import AuthorizedRoute from '../AuthorizedRoute';
+import AuthorizedRoute from 'common/components/AuthorizedRoute';
 import { Provider } from 'react-redux';
-import store from 'rdx/store';
+import store from 'common/redux/store';
 import { Container } from 'react-bootstrap';
 
 const App = () => {

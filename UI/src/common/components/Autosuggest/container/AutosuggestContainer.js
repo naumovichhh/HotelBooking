@@ -1,6 +1,5 @@
-import React from 'react';
+/*import React from 'react';
 import Autosuggest from 'react-autosuggest';
-import countries from './countries.min.json';
 
 class AutosuggestContainer extends React.Component {
     constructor(props) {
@@ -45,4 +44,4 @@ class AutosuggestContainer extends React.Component {
     }
 }
 
-export default AutosuggestContainer;
+export default AutosuggestContainer;*/

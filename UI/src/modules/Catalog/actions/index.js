@@ -1,4 +1,4 @@
-import request from 'request';
+import request from 'common/request';
 
 const GET_HOTELS_REQUEST = "GET_HOTELS_REQUEST";
 const GET_HOTELS_SUCCESS = "GET_HOTELS_SUCCESS";

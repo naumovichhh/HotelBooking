@@ -1,5 +1,4 @@
-import request from 'request';
-import store from 'rdx/store';
+import request from 'common/request';
 
 const AUTHORIZATION_REQUEST = "AUTHORIZATION_REQUEST";
 const AUTHORIZATION_FAILURE = "AUTHORIZATION_FAILURE";
@@ -27,19 +26,24 @@ function failure() {
 }
 
 function authorize(credentials) {
-    return dispatch => {
-        store.dispatch(_request());
-        request({
-            method: "POST",
-            url: "api/auth",
-            body: JSON.stringify(credentials)
-        })
-        .then(result => {
-            if (result.authorized)
-                store.dispatch(success({ user: result.user }));
-            else
-                store.dispatch(failure);
-        });
+    return async dispatch => {
+        dispatch(_request());
+        try {
+            let response = await request({
+                method: "POST",
+                url: "api/auth",
+                body: JSON.stringify(credentials)
+            })
+            if (response.ok) {
+                throw new Error("Not implemented");
+                dispatch(success());
+            } else {
+                dispatch(failure());
+            }
+        }
+        catch {
+            dispatch(failure());
+        }
     };
 }
 

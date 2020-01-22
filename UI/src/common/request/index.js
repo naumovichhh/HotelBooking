@@ -1,5 +1,5 @@
 import requestMock from './mock/requestMock';
-import store from 'rdx/store';
+import store from 'common/redux/store';
 
 function request(params) {
     return requestMock(params);

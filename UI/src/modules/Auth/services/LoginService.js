@@ -1,4 +1,4 @@
-import store from 'rdx/store';
+import store from 'common/redux/store';
 import { authorize } from '../actions';
 
 class LoginService {

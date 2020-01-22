@@ -1,5 +1,5 @@
 import request from 'request';
-import store from 'rdx/store';
+import store from 'common/redux/store';
 import fetchHotels from '../actions';
 
 class AdminService {

@@ -3,31 +3,28 @@ import Search from '../component/Search';
 import { connect } from 'react-redux';
 import { fetchHotels as fetchHotelsAction } from '../../../actions';
 import setSearchParametersAction from 'modules/Search/actions';
+import localities from 'common/data/localities.min.json';
 
 const msInDay = 24*3600*1000;
 
 class SearchContainer extends React.Component {
-    countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla","Antigua & Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas"
-	,"Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia & Herzegovina","Botswana","Brazil","British Virgin Islands"
-	,"Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica"
-	,"Cote D Ivoire","Croatia","Cruise Ship","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea"
-	,"Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana"
-	,"Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India"
-	,"Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kuwait","Kyrgyz Republic","Laos","Latvia"
-	,"Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Mauritania"
-	,"Mauritius","Mexico","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Namibia","Nepal","Netherlands","Netherlands Antilles","New Caledonia"
-	,"New Zealand","Nicaragua","Niger","Nigeria","Norway","Oman","Pakistan","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal"
-	,"Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre & Miquelon","Samoa","San Marino","Satellite","Saudi Arabia","Senegal","Serbia","Seychelles"
-	,"Sierra Leone","Singapore","Slovakia","Slovenia","South Africa","South Korea","Spain","Sri Lanka","St Kitts & Nevis","St Lucia","St Vincent","St. Lucia","Sudan"
-	,"Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad & Tobago","Tunisia"
-	,"Turkey","Turkmenistan","Turks & Caicos","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","United States Minor Outlying Islands","Uruguay"
-	,"Uzbekistan","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
 
 	constructor(props) {
         super(props);
-		this.state = { 
-			...props.search
-		};
+		if (props.search.country) {
+			this.state = {
+				...props.search
+			}
+		} else {
+			this.state = { 
+				country: '',
+				locality: '',
+				from: new Date(Date.now() + 1*msInDay).toISOString().slice(0, 10),
+				to: new Date(Date.now() + 2*msInDay).toISOString().slice(0, 10),
+				adult: 1,
+				child: 0
+			};
+		}
 	}
 
 	daysNotExcess(from, to) {
@@ -93,7 +90,6 @@ class SearchContainer extends React.Component {
 		let value = e.target.value;
 		if (value <= 10 && value >= 1) {
 			this.setState({ adult: value });
-			this.onChange();
 		}
 	};
 
@@ -101,28 +97,31 @@ class SearchContainer extends React.Component {
 		let value = e.target.value;
 		if (value <= 10 && value >= 0 && value){
 			this.setState({ child: value });
-			this.onChange();
 		}
 	};
 
 	onCountryChange = (e) => {
 		this.setState({ country: e.value });
-		this.onChange();
 	};
 
 	onLocalityChange = (e) => {
-		let value = e.target.value;
-		this.setState({ locality: value });
-		this.onChange();
+		this.setState({ locality: e.value });
 	};
-	
-	onChange = () => {
+
+	onSubmit = () => {
 		if (!this.state.country)
 		{
+			alert("Choose country");
+			return;
+		}
+		if (!this.state.locality)
+		{
+			alert("Enter locality");
 			return;
 		}
 		if (this.state.locality.search(/^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/) === -1)
 		{
+			alert("Enter valid locality");
 			return;
 		}
 
@@ -134,13 +133,10 @@ class SearchContainer extends React.Component {
 			adult: this.state.adult,
 			child: this.state.child
 		});
-
-		if (this.timeoutId) clearTimeout(this.timeoutId);
-        this.timeoutId = setTimeout(() => this.props.fetchHotels(this.props.search), 2000);
-	};
+	}
 
     render() {
-        return <Search countries={this.countries}
+        return <Search localities={localities}
 					 onCountryChange={this.onCountryChange}
 					 onLocalityChange={this.onLocalityChange}
 					 onFromChange={this.onFromChange}

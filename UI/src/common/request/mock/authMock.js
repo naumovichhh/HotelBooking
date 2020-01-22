@@ -1,4 +1,4 @@
-import json from './accounts.json.js';
+import json from './accounts.json';
 
 const authMock = {
     GET: () => {
