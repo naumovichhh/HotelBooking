@@ -12,7 +12,7 @@ namespace Core.Entities
 
         public int Id { get; set; }
         public int Room { get; set; }
-        public string User { get; set; }
+        public int User { get; set; }
         public DateTime From { get; set; }
         public DateTime To { get; set; }
 

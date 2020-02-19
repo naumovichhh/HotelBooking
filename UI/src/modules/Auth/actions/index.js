@@ -29,16 +29,16 @@ function authorize(credentials) {
     return async dispatch => {
         dispatch(_request());
         try {
-            let response = await request({
+            let response = await request("api/auth", {
                 method: "POST",
-                url: "api/auth",
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(credentials)
-            })
+            });
             if (response.ok) {
                 throw new Error("Not implemented");
                 dispatch(success());
             } else {
-                dispatch(failure());
+                throw new Error();
             }
         }
         catch {

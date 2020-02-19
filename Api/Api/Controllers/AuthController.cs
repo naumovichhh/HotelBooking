@@ -51,12 +51,22 @@ namespace Api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody]UserViewModel credentials)
+        public async Task<IActionResult> Login([FromBody]LoginViewModel creds)
         {
-            string name = credentials.Name, password = credentials.Password;
-            var userToken = await _service.LoginAsync(name, password);
-            if (userToken != null)
-                return Ok(userToken);
+            var dto = _mapper.Map<LoginDTO>(creds);
+            var result = await _service.LoginAsync(dto);
+            if (result != null)
+                return Ok(result);
+            else
+                return Unauthorized();
+        }
+
+        [HttpPost("refresh")]
+        public async Task<IActionResult> Refresh([FromBody]string refreshToken)
+        {
+            var result = await _service.RefreshAsync(refreshToken);
+            if (result != null)
+                return Ok(result);
             else
                 return Unauthorized();
         }

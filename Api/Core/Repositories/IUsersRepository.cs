@@ -9,9 +9,10 @@ namespace Core.Repositories
     public interface IUsersRepository
     {
         Task<IEnumerable<UserEntity>> GetAllAsync();
-        Task<UserEntity> GetByNameOrEmailAsync(string id);
+        Task<UserEntity> GetByIdAsync(int id);
+        Task<UserEntity> GetByLoginAsync(string login);
         Task<UserEntity> CreateAsync(UserEntity user);
         Task<UserEntity> UpdateAsync(UserEntity user);
-        Task<UserEntity> DeleteAsync(string name);
+        Task<UserEntity> DeleteAsync(int id);
     }
 }

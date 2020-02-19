@@ -29,9 +29,8 @@ function fetchHotels(params) {
     return async dispatch => {
         dispatch(_request());
         try {
-            let response = await request({
-                method: "GET",
-                url: "api/hotels"+"?"+paramsToQuery(params)
+            let response = await request("api/hotels"+"?"+paramsToQuery(params), {
+                method: "GET"
             });
             if (response.ok) dispatch(success(await response.json()));
             else throw new Error(response.statusText);

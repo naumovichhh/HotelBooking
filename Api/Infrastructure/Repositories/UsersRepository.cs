@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Core.Entities;
@@ -25,13 +26,9 @@ namespace Infrastructure.Repositories
             return result;
         }
 
-        public async Task<UserEntity> DeleteAsync(string key)
+        public async Task<UserEntity> DeleteAsync(int id)
         {
-            var entity = await _context.Users.FindAsync(key);
-            if (entity == null)
-            {
-                entity = await _context.Users.SingleOrDefaultAsync(u => u.Email == key);
-            }
+            var entity = await _context.Users.FindAsync(id);
 
             if (entity == null)
                 return null;
@@ -45,19 +42,26 @@ namespace Infrastructure.Repositories
             return await _context.Users.ToListAsync();
         }
 
-        public async Task<UserEntity> GetByNameOrEmailAsync(string key)
+        public async Task<UserEntity> GetByIdAsync(int id)
         {
-            var entity =  await _context.Users.FindAsync(key);
+            var entity =  await _context.Users.FindAsync(id);
+            return entity;
+        }
+
+        public async Task<UserEntity> GetByLoginAsync(string login)
+        {
+            var entity = await Task.Run(() => _context.Users.FirstOrDefault(u => u.Name == login));
             if (entity == null)
             {
-                return await _context.Users.SingleOrDefaultAsync(u => u.Email == key);
+                entity = await Task.Run(() => _context.Users.FirstOrDefault(u => u.Email == login));
             }
-            else return entity;
+
+            return entity;
         }
 
         public async Task<UserEntity> UpdateAsync(UserEntity user)
         {
-            var existing = await _context.Users.FindAsync(user.Name);
+            var existing = await _context.Users.FindAsync(user.Id);
             if (existing != null)
             {
                 var result = _context.Users.Update(user).Entity;

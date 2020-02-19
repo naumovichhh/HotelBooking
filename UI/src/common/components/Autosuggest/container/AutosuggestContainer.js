@@ -1,4 +1,4 @@
-/*import React from 'react';
+import React from 'react';
 import Autosuggest from 'react-autosuggest';
 
 class AutosuggestContainer extends React.Component {
@@ -8,13 +8,12 @@ class AutosuggestContainer extends React.Component {
     }
 
     onSuggestionsFetchRequested = ({ value }) => {
-        console.log(value);
-        let inputLength = value.length;
         let inputValue = value.trim().toLowerCase();
-        if (inputLength && this.props) {
-            let localities = countries[this.props.country];
-            if (localities) {
-                let suggestions = localities.filter(l => l.toLowerCase().slice(0, inputLength) === inputValue);
+        let inputLength = inputValue.length;
+        let options = this.props.options;
+        if (inputLength) {
+            if (options) {
+                let suggestions = options.filter(o => o.toLowerCase().slice(0, inputLength) === inputValue);
                 this.setState({ suggestions });
             } else {
                 this.setState({ suggestions: [] });
@@ -31,17 +30,17 @@ class AutosuggestContainer extends React.Component {
     render() {
 
         const { value, onChange } = this.props;
-        const inputProps = { value, onChange };
+        const inputProps = { value, onChange, class: "form-control" };
 
         return <Autosuggest
             suggestions={this.state.suggestions}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
             onSuggestionsClearRequested={this.onSuggestionsClearRequested}
             getSuggestionValue={suggestion => suggestion}
-            renderSuggestion={suggestion => suggestion}
+            renderSuggestion={suggestion => <div>{suggestion}</div>}
             inputProps={inputProps}
         />;
     }
 }
 
-export default AutosuggestContainer;*/
+export default AutosuggestContainer;

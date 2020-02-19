@@ -33,27 +33,14 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
-            {
-                options.RequireHttpsMetadata = false;
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidIssuer = AuthOptions.Issuer,
-                    ValidateAudience = true,
-                    ValidAudience = AuthOptions.Audience,
-                    ValidateLifetime = true,
-                    IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
-                    ValidateIssuerSigningKey = true
-                };
-            });
-            services.AddAuthorization();
+            ConfigureJwtAuthService(services);
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DefaultContext>(options => options.UseSqlServer(connection));
             services.AddScoped<IHotelsRepository, HotelsRepository>();
             services.AddScoped<IHotelsService, HotelsService>();
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<IRefreshTokensRepository, RefreshTokensRepository>();
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("V1", new OpenApiInfo() { Title = "Booking Machine", Version = "V1" });
@@ -65,6 +52,7 @@ namespace Api
                 c.CreateMap<HotelDTO, HotelViewModel>().ReverseMap();
                 c.CreateMap<UserDTO, UserEntity>().ReverseMap();
                 c.CreateMap<UserDTO, UserViewModel>().ReverseMap();
+                c.CreateMap<LoginViewModel, LoginDTO>();
             });
             var mapper = mappingConfiguration.CreateMapper();
             services.AddSingleton(mapper);
@@ -100,6 +88,25 @@ namespace Api
             {
                 endpoints.MapControllers();
             });
+        }
+
+        private void ConfigureJwtAuthService(IServiceCollection services)
+        {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidIssuer = AuthOptions.Issuer,
+                    ValidateAudience = true,
+                    ValidAudience = AuthOptions.Audience,
+                    ValidateLifetime = true,
+                    IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
+                    ValidateIssuerSigningKey = true
+                };
+            });
+            services.AddAuthorization();
         }
     }
 }

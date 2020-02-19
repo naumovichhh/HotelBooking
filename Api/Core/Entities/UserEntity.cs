@@ -8,8 +8,10 @@ namespace Core.Entities
         public UserEntity()
         {
             Bookings = new HashSet<BookingEntity>();
+            RefreshTokens = new HashSet<RefreshTokenEntity>();
         }
 
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Role { get; set; }
         public string Password { get; set; }
@@ -18,5 +20,6 @@ namespace Core.Entities
         public string Salt { get; set; }
 
         public virtual ICollection<BookingEntity> Bookings { get; set; }
+        public virtual ICollection<RefreshTokenEntity> RefreshTokens { get; set; }
     }
 }

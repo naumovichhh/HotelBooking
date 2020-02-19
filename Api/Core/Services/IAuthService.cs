@@ -9,6 +9,7 @@ namespace Core.Services
     public interface IAuthService
     {
         Task<string> RegisterAsync(UserDTO user);
-        Task<UserTokenDTO> LoginAsync(string name, string password);
+        Task<UserTokenDTO> LoginAsync(LoginDTO creds);
+        Task<UserTokenDTO> RefreshAsync(string refreshToken);
     }
 }

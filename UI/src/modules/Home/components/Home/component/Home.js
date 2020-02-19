@@ -4,19 +4,21 @@ import Select from 'react-select';
 import FastSelect from 'common/components/FastSelect';
 
 const Home = (props) => {
-    let countries = Object.keys(props.localities).map(c => ({ value: c, label: c }));
-    let localities = props.localities[props.country] && Array.from(new Set(props.localities[props.country])).map(l => ({ value: l, label: l }));
+    let countries = Object.keys(props.localities);
+    let localities = props.localities[props.country] && Array.from(new Set(props.localities[props.country]));
+    let countriesOptions = countries.map(c => ({ label: c, value: c }));
+    let localitiesOptions = localities && localities.map(l => ({ label: l, value: l }));
     return <div className="row" >
         <div className="col-10 col-md-6" >
             <Form>            
                 <h3>Find a place to stay </h3>
                 <Form.Group>
                     <Form.Label>Country</Form.Label>
-                    <Select value={{ label: props.country, value: props.country }} onChange={props.onCountryChange} options={countries} />
+                    <Select value={{ label: props.country, value: props.country }} onChange={props.onCountryChange} options={countriesOptions} />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>Locality</Form.Label>
-                    <FastSelect value={{ label: props.locality, value: props.locality }} onChange={props.onLocalityChange} options={localities} />
+                    <FastSelect value={{ label: props.locality, value: props.locality }} onChange={props.onLocalityChange} options={localitiesOptions} />
                 </Form.Group>
                 <Form.Group>
                     <Form.Label>From</Form.Label>

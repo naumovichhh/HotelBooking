@@ -70,7 +70,6 @@ class SearchContainer extends React.Component {
 		else {
 			this.setState({ from: value, to: new Date(new Date(value).getTime()+1*msInDay).toISOString().slice(0, 10) });
 		}
-		this.onChange();
 	};
 
 	onToChange = (e) => {
@@ -133,6 +132,7 @@ class SearchContainer extends React.Component {
 			adult: this.state.adult,
 			child: this.state.child
 		});
+		this.props.fetchHotels(this.props.search);
 	}
 
     render() {

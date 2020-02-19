@@ -2,10 +2,12 @@ import { connect } from 'react-redux';
 import React from 'react';
 import Catalog from '../component/Catalog';
 import { fetchHotels as fetchHotelsAction } from '../../../actions';
+import { Redirect } from 'react-router-dom';
 
 class CatalogContainer extends React.Component {
     componentDidMount() {
-        this.props.fetchHotels(this.props.search);
+        if (this.props.search.country)
+            this.props.fetchHotels(this.props.search);
     }
 
     onClick = (id) => {
@@ -13,6 +15,9 @@ class CatalogContainer extends React.Component {
     }
 
     render() {
+        if (!this.props.search.country)
+            return <Redirect to="/home" />
+
         return <Catalog
             hotelsList={this.props.list}
             fulfilled={this.props.fulfilled}

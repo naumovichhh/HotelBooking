@@ -33,13 +33,11 @@ function Catalog(props) {
     } else {
         hotelsResult = <Alert variant="info"><Alert.Heading>There are no matching offers</Alert.Heading></Alert>;
     }
-    return <div className="row">
-        <div className="col-9 col-sm-8" >
+    return <div>
             <Search />
             <br />
             {hotelsResult}
-        </div>
-    </div>;
+        </div>;
 }
 
 export default Catalog;

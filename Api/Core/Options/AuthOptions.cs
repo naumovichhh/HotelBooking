@@ -10,7 +10,7 @@ namespace Core.Options
         public const string Issuer = "Hotel Booking Server";
         public const string Audience = "Hotel Booking Client";
         private const string Key = "fa42fajasUIlfl8Ui445aJK8";
-        public const int LifeTime = 1;
+        public static readonly TimeSpan LifeTime = TimeSpan.FromMinutes(10);
         public static SymmetricSecurityKey GetSymmetricSecurityKey()
         {
             return new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Key));

@@ -29,15 +29,12 @@ namespace Infrastructure.Repositories
         }
         public async Task<HotelEntity> UpdateAsync(HotelEntity hotel)
         {
-            HotelEntity existing = await _context.Hotels.FindAsync(hotel.Id);
-            if (existing != null)
-            {
-                var entry = _context.Hotels.Update(hotel);
-                await _context.SaveChangesAsync();
-                return entry.Entity;
-            }
-            else
-                return null;
+            HotelEntity found = await _context.Hotels.FindAsync(hotel.Id);
+            if (found != null) return null;
+
+            var entry = _context.Hotels.Update(hotel);
+            await _context.SaveChangesAsync();
+            return entry.Entity;
         }
 
         public async Task<HotelEntity> DeleteAsync(int id)

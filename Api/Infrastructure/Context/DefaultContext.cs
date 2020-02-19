@@ -26,6 +26,7 @@ namespace Infrastructure.Context
         public virtual DbSet<RoomTypeEntity> RoomTypes { get; set; }
         public virtual DbSet<RoomTypeRoomFeatureEntity> RoomTypeRoomFeatures { get; set; }
         public virtual DbSet<UserEntity> Users { get; set; }
+        public virtual DbSet<RefreshTokenEntity> RefreshTokens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -53,10 +54,6 @@ namespace Infrastructure.Context
                 entity.Property(e => e.From).HasColumnType("date");
 
                 entity.Property(e => e.To).HasColumnType("date");
-
-                entity.Property(e => e.User)
-                    .IsRequired()
-                    .HasMaxLength(30);
 
                 entity.HasOne(d => d.RoomNavigation)
                     .WithMany(p => p.Bookings)
@@ -181,9 +178,9 @@ namespace Infrastructure.Context
             {
                 entity.ToTable("User");
 
-                entity.HasKey(e => e.Name);
-
-                entity.Property(e => e.Name).HasMaxLength(30);
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(30);
 
                 entity.Property(e => e.Email)
                     .IsRequired()
@@ -201,6 +198,28 @@ namespace Infrastructure.Context
                 entity.Property(e => e.Role)
                     .IsRequired()
                     .HasMaxLength(10);
+            });
+
+            modelBuilder.Entity<RefreshTokenEntity>(entity =>
+            {
+                entity.ToTable("RefreshToken");
+
+                entity.HasKey(e => e.Value);
+
+                entity.Property(e => e.Value).HasMaxLength(50);
+                entity.Property(e => e.Successor).HasMaxLength(50);
+
+                entity.HasOne(d => d.UserNavigation)
+                    .WithMany(p => p.RefreshTokens)
+                    .HasForeignKey(d => d.User)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_RefreshToken_User");
+
+                entity.HasOne(d => d.SuccessorNavigation)
+                    .WithOne(p => p.PrecursorNavigation)
+                    .HasForeignKey<RefreshTokenEntity>(d => d.Successor)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_RefreshToken_RefreshToken");
             });
 
             OnModelCreatingPartial(modelBuilder);
